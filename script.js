@@ -1,73 +1,48 @@
 const questionsAndAnswers = {
   "how did i get picked for jury service":
     "From a combined list of registered Philadelphia voters and adult licensed drivers, jurors are randomly selected by computer.",
-  "why have some people never been called for jury service and i've been called more than once":
-    "Selection is random. Duplicate name formats on different lists can increase chances. The court cannot alter the lists.",
-  "what if the date i'm called to serve is not convenient":
-    "Fill out your questionnaire and request a new date by phone or online. Hardship requests must be mailed.",
-  "if i am excused by the voice response system when will i have to report again":
-    "You’re treated as if you served and won’t be required again for 12 months.",
-  "how long will i be required to serve":
-    "You must serve one day unless selected for a trial, then for the trial duration.",
   "how often must i serve":
     "If you serve 1–2 days, you're exempt for 1 year. If you serve 3+ days, you're exempt for 3 years.",
-  "does my employer have to pay me for jury service":
-    "No, but they can’t punish you for attending. Employers are not required to pay you.",
-  "what is considered an extreme hardship":
-    "Childcare, lost wages, or caregiving issues. Documentation required. Call 215-683-7170 with questions.",
-  "will i get paid for serving as a juror":
-    "Yes. $9/day for the first 3 days, $25/day after. A check will be mailed after your service.",
-  "who do i talk to about my jury check":
-    "Call the Jury Commission Payroll Dept at 215-683-7193.",
-  "can i bring electronics":
-    "Yes, but they must be turned off in the courtroom unless otherwise instructed.",
   "i lost my summons how do i get a new one":
     "Call 215 683-7170 and follow prompts or speak to a representative, available Mon–Fri 8:30 AM – 3:30 PM.",
+  "why have some people never been called for jury service and i've been called more than once":
+    "Selection is random. Duplicate name formats on different lists can increase chances. The court cannot alter the lists.",
+  "how long will i be required to serve":
+    "You must serve one day unless selected for a trial, then for the trial duration.",
+  "will i get paid for serving as a juror":
+    "Yes. $9/day for the first 3 days, $25/day after. A check will be mailed after your service.",
+  "does my employer have to pay me for jury service":
+    "No, but they can’t punish you for attending. Employers are not required to pay you.",
+  "what if the date i'm called to serve is not convenient":
+    "Fill out your questionnaire and request a new date by phone or online. Hardship requests must be mailed.",
+  "what is considered an extreme hardship":
+    "Childcare, lost wages, or caregiving issues. Documentation required. Call 215-683-7170 with questions.",
   "what form of id is needed when inquiring about my summons":
     "Name, address, date of birth, and participant number (if known). Never your SSN.",
+  "if i am excused by the voice response system when will i have to report again":
+    "You’re treated as if you served and won’t be required again for 12 months.",
   "why am i told to call the night before":
     "To check if you’re still needed, since juror demand changes daily. Call the night before to confirm.",
-  "what should i wear":
-    "Casual, respectful clothing. Ties not required. Slacks, dresses, or sport shirts are appropriate.",
+  "what should i bring when i report":
+    "Bring your summons and something to read while waiting.",
   "what if i fail to return the questionnaire or report":
     "You may be held in contempt and fined. The court tries to avoid using this option.",
+  "what should i wear":
+    "Casual, respectful clothing. Ties not required. Slacks, dresses, or sport shirts are appropriate.",
+  "can i bring electronics":
+    "Yes, but they must be turned off in the courtroom unless otherwise instructed.",
   "where can i park":
-    "Use public transit if possible. See the SEPTA or Philadelphia Parking Authority websites."
-};
-
-const questionCategories = {
-  "Jury Selection": [
-    "how did i get picked for jury service",
-    "why have some people never been called for jury service and i've been called more than once"
-  ],
-  "Scheduling & Time Conflicts": [
-    "what if the date i'm called to serve is not convenient",
-    "if i am excused by the voice response system when will i have to report again",
-    "how long will i be required to serve",
-    "how often must i serve",
-    "does my employer have to pay me for jury service",
-    "what is considered an extreme hardship"
-  ],
-  "Payment": [
-    "will i get paid for serving as a juror",
-    "who do i talk to about my jury check"
-  ],
-  "Logistics & Requirements": [
-    "can i bring electronics",
-    "i lost my summons how do i get a new one",
-    "what form of id is needed when inquiring about my summons",
-    "why am i told to call the night before",
-    "what should i wear",
-    "what if i fail to return the questionnaire or report",
-    "where can i park"
-  ]
+    "Use public transit if possible. See the SEPTA or Philadelphia Parking Authority websites.",
+  "who do i talk to about my jury check":
+    "Call the Jury Commission Payroll Dept at 215-683-7193."
 };
 
 const chatBox = document.getElementById("chatBox");
+const questionList = document.getElementById("questionList");
 const chatForm = document.getElementById("chatForm");
 const userInput = document.getElementById("userInput");
-const categoryList = document.getElementById("categoryList");
 
+// Initialize bot with welcome message
 appendMessage("How may I help you?", "bot");
 
 function appendMessage(text, sender) {
@@ -78,16 +53,42 @@ function appendMessage(text, sender) {
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-function getBotResponse(input) {
-  const cleanInput = input.toLowerCase().trim();
-  for (const question in questionsAndAnswers) {
-    if (cleanInput.includes(question)) {
-      return questionsAndAnswers[question];
-    }
-  }
-  return "I'm sorry, I couldn't find an answer to that. Try selecting a category below.";
+// Helper function to calculate simple similarity between two strings
+function similarity(str1, str2) {
+  const words1 = str1.split(/\s+/);
+  const words2 = str2.split(/\s+/);
+  let matches = 0;
+
+  words1.forEach((w1) => {
+    if (words2.includes(w1)) matches++;
+  });
+
+  return matches / Math.max(words1.length, words2.length);
 }
 
+function getBotResponse(input) {
+  const cleanInput = input.toLowerCase().trim();
+
+  let bestMatch = null;
+  let highestScore = 0;
+
+  for (const question in questionsAndAnswers) {
+    const score = similarity(cleanInput, question);
+    if (score > highestScore) {
+      highestScore = score;
+      bestMatch = question;
+    }
+  }
+
+  // Only respond if similarity is above threshold (0.4 here)
+  if (highestScore > 0.4) {
+    return questionsAndAnswers[bestMatch];
+  } else {
+    return "I'm not sure how to answer that. Try rephrasing or selecting a question below.";
+  }
+}
+
+// Handle text input submit
 chatForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const input = userInput.value.trim();
@@ -100,38 +101,15 @@ chatForm.addEventListener("submit", (e) => {
   }, 600);
 });
 
-// Build expandable tree
-Object.entries(questionCategories).forEach(([category, questions]) => {
-  const wrapper = document.createElement("div");
-  wrapper.className = "category-wrapper";
-
-  const toggle = document.createElement("button");
-  toggle.className = "category-toggle";
-  toggle.textContent = category;
-  toggle.setAttribute("data-open", "false");
-
-  const sublist = document.createElement("div");
-  sublist.className = "question-sublist";
-
-  questions.forEach((q) => {
-    const btn = document.createElement("button");
-    btn.textContent = q.charAt(0).toUpperCase() + q.slice(1) + "?";
-    btn.onclick = () => {
-      appendMessage(btn.textContent, "user");
-      setTimeout(() => {
-        appendMessage(questionsAndAnswers[q], "bot");
-      }, 500);
-    };
-    sublist.appendChild(btn);
-  });
-
-  toggle.onclick = () => {
-    const open = toggle.getAttribute("data-open") === "true";
-    toggle.setAttribute("data-open", !open);
-    sublist.style.display = open ? "none" : "block";
+// Populate clickable questions
+Object.keys(questionsAndAnswers).forEach((question) => {
+  const btn = document.createElement("button");
+  btn.textContent = question.charAt(0).toUpperCase() + question.slice(1) + "?";
+  btn.onclick = () => {
+    appendMessage(btn.textContent, "user");
+    setTimeout(() => {
+      appendMessage(questionsAndAnswers[question], "bot");
+    }, 500);
   };
-
-  wrapper.appendChild(toggle);
-  wrapper.appendChild(sublist);
-  categoryList.appendChild(wrapper);
+  questionList.appendChild(btn);
 });
