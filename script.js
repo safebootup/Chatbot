@@ -1,6 +1,3 @@
-const botName = "James";
-const botAvatar = "https://www.bing.com/images/search?q=avatar+image&id=BD27E8044123DA6E1E38206F81A140DC8A12C2CC&FORM=IACFIR"; // Replace with your avatar image URL
-
 const questionsAndAnswers = {
   "how did i get picked for jury service":
     "From a combined list of registered Philadelphia voters and adult licensed drivers, jurors are randomly selected by computer.",
@@ -40,80 +37,48 @@ const questionsAndAnswers = {
     "Call the Jury Commission Payroll Dept at 215-683-7193."
 };
 
-const questionGroups = {
-  "Jury Selection": [
-    "how did i get picked for jury service",
-    "why have some people never been called for jury service and i've been called more than once",
-    "what if i fail to return the questionnaire or report"
-  ],
-  "Scheduling": [
-    "what if the date i'm called to serve is not convenient",
-    "how often must i serve",
-    "if i am excused by the voice response system when will i have to report again"
-  ],
-  "Payment/Work Hours": [
-    "will i get paid for serving as a juror",
-    "how long will i be required to serve",
-    "does my employer have to pay me for jury service",
-    "what is considered an extreme hardship",
-    "where can i park"
-  ],
-  "Requirements for Jury Duty": [
-    "can i bring electronics",
-    "i lost my summons how do i get a new one",
-    "what form of id is needed when inquiring about my summons",
-    "why am i told to call the night before",
-    "what should i wear",
-    "what if i fail to return the questionnaire or report"
-  ],
-  "Time Conflicts": [
-    "how long will i be required to serve",
-    "how often must i serve",
-    "does my employer have to pay me for jury service",
-    "what if the date i'm called to serve is not convenient",
-    "what is considered an extreme hardship",
-    "if i am excused by the voice response system when will i have to report again"
-  ]
-};
-
 const chatBox = document.getElementById("chatBox");
 const questionList = document.getElementById("questionList");
 const chatForm = document.getElementById("chatForm");
 const userInput = document.getElementById("userInput");
-const questionGroupsContainer = document.getElementById("questionGroups");
 
 // Initialize bot with welcome message
-appendMessage("How may I help you?", "bot");
+appendBotMessage("How may I help you?");
 
-function appendMessage(text, sender) {
+// Append user message function
+function appendUserMessage(text) {
   const msg = document.createElement("div");
-  msg.classList.add("message", sender);
+  msg.classList.add("message", "user");
+  msg.textContent = text;
+  chatBox.appendChild(msg);
+  chatBox.scrollTop = chatBox.scrollHeight;
+}
 
-  if (sender === "bot") {
-    const avatar = document.createElement("img");
-    avatar.src = botAvatar;
-    avatar.alt = botName;
-    avatar.classList.add("avatar");
+// Append bot message function with avatar and name "James"
+function appendBotMessage(text) {
+  const msg = document.createElement("div");
+  msg.classList.add("message", "bot");
 
-    const textContainer = document.createElement("div");
-    textContainer.classList.add("bot-text-container");
+  const avatar = document.createElement("img");
+  avatar.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Profile_avatar_placeholder_large.png/512px-Profile_avatar_placeholder_large.png";
+  avatar.alt = "James Avatar";
+  avatar.classList.add("avatar");
 
-    const nameLabel = document.createElement("div");
-    nameLabel.textContent = botName;
-    nameLabel.classList.add("bot-name");
+  const content = document.createElement("div");
+  content.classList.add("bot-message-content");
 
-    const messageText = document.createElement("div");
-    messageText.textContent = text;
-    messageText.classList.add("bot-text");
+  const name = document.createElement("div");
+  name.classList.add("bot-name");
+  name.textContent = "James";
 
-    textContainer.appendChild(nameLabel);
-    textContainer.appendChild(messageText);
+  const messageText = document.createElement("div");
+  messageText.classList.add("bot-text");
+  messageText.textContent = text;
 
-    msg.appendChild(avatar);
-    msg.appendChild(textContainer);
-  } else {
-    msg.textContent = text;
-  }
+  content.appendChild(name);
+  content.appendChild(messageText);
+  msg.appendChild(avatar);
+  msg.appendChild(content);
 
   chatBox.appendChild(msg);
   chatBox.scrollTop = chatBox.scrollHeight;
@@ -134,57 +99,23 @@ chatForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const input = userInput.value.trim();
   if (!input) return;
-  appendMessage(input, "user");
+  appendUserMessage(input);
   userInput.value = "";
-
   setTimeout(() => {
     const response = getBotResponse(input);
-    appendMessage(response, "bot");
+    appendBotMessage(response);
   }, 600);
 });
 
-// Populate clickable questions below input box
+// Populate clickable questions
 Object.keys(questionsAndAnswers).forEach((question) => {
   const btn = document.createElement("button");
   btn.textContent = question.charAt(0).toUpperCase() + question.slice(1) + "?";
   btn.onclick = () => {
-    appendMessage(btn.textContent, "user");
+    appendUserMessage(btn.textContent);
     setTimeout(() => {
-      appendMessage(questionsAndAnswers[question], "bot");
+      appendBotMessage(questionsAndAnswers[question]);
     }, 500);
   };
   questionList.appendChild(btn);
 });
-
-// Populate collapsible question groups
-for (const group in questionGroups) {
-  // Create group title button
-  const groupTitle = document.createElement("div");
-  groupTitle.textContent = group;
-  groupTitle.classList.add("group-title");
-
-  // Create container for group questions
-  const groupContent = document.createElement("div");
-  groupContent.classList.add("group-content");
-
-  // Add each question button to group content
-  questionGroups[group].forEach((q) => {
-    const btn = document.createElement("button");
-    btn.textContent = q.charAt(0).toUpperCase() + q.slice(1) + "?";
-    btn.onclick = () => {
-      appendMessage(btn.textContent, "user");
-      setTimeout(() => {
-        appendMessage(questionsAndAnswers[q], "bot");
-      }, 500);
-    };
-    groupContent.appendChild(btn);
-  });
-
-  // Toggle open/close on group title click
-  groupTitle.addEventListener("click", () => {
-    groupContent.classList.toggle("open");
-  });
-
-  questionGroupsContainer.appendChild(groupTitle);
-  questionGroupsContainer.appendChild(groupContent);
-}
