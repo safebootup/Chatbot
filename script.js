@@ -11,13 +11,13 @@ const questionsAndAnswers = {
     "You must serve one day unless selected for a trial, then for the trial duration.",
   "how often must i serve":
     "If you serve 1–2 days, you're exempt for 1 year. If you serve 3+ days, you're exempt for 3 years.",
-  "does my employer have to pay me for jury service":
+  "does my employer have to pay me for time missed from work due to jury service":
     "No, but they can’t punish you for attending. Employers are not required to pay you.",
   "what is considered an extreme hardship":
     "Childcare, lost wages, or caregiving issues. Documentation required. Call 215-683-7170 with questions.",
-  "what if the date i'm called to serve is not convenient":
-    "Fill out your questionnaire and request a new date by phone or online. Hardship requests must be mailed.",
-  "can i bring electronics":
+  "where can i park":
+    "Use public transit if possible. See the SEPTA or Philadelphia Parking Authority websites.",
+  "can i bring my cell phone, laptop, or other electronic device into the courthouse":
     "Yes, but they must be turned off in the courtroom unless otherwise instructed.",
   "i lost my summons how do i get a new one":
     "Call 215 683-7170 and follow prompts or speak to a representative, available Mon–Fri 8:30 AM – 3:30 PM.",
@@ -27,15 +27,49 @@ const questionsAndAnswers = {
     "To check if you’re still needed, since juror demand changes daily. Call the night before to confirm.",
   "what should i wear":
     "Casual, respectful clothing. Ties not required. Slacks, dresses, or sport shirts are appropriate.",
-  "where can i park":
-    "Use public transit if possible. See the SEPTA or Philadelphia Parking Authority websites.",
   "if i am excused by the voice response system when will i have to report again":
-    "You’re treated as if you served and won’t be required again for 12 months."
+    "You’re treated as if you served and won’t be required again for 12 months.",
+  "what if the date i'm called to serve is not convenient":
+    "Fill out your questionnaire and request a new date by phone or online. Hardship requests must be mailed.",
+  "who do i talk to about my jury check":
+    "Call the Jury Commission Payroll Dept at 215-683-7193."
+};
+
+const faqStructure = {
+  "Jury Selection": [
+    "how did i get picked for jury service",
+    "why have some people never been called for jury service and i've been called more than once",
+    "what if i fail to return the questionnaire or report for service"
+  ],
+  "Payment / Work Hours": [
+    "will i get paid for serving as a juror",
+    "how long will i be required to serve",
+    "how often must i serve",
+    "does my employer have to pay me for time missed from work due to jury service",
+    "what is considered an extreme hardship",
+    "where can i park"
+  ],
+  "Requirements for Jury Duty": [
+    "can i bring my cell phone, laptop, or other electronic device into the courthouse",
+    "i lost my summons how do i get a new one",
+    "what form of id is needed when inquiring about my summons",
+    "why am i told to call the night before",
+    "what should i wear"
+  ],
+  "Time Conflicts": [
+    "how long will i be required to serve",
+    "how often must i serve",
+    "does my employer have to pay me for time missed from work due to jury service",
+    "what if the date i'm called to serve is not convenient",
+    "what is considered an extreme hardship",
+    "if i am excused by the voice response system when will i have to report again"
+  ]
 };
 
 const chatBox = document.getElementById("chatBox");
 const chatForm = document.getElementById("chatForm");
 const userInput = document.getElementById("userInput");
+const faqContainer = document.getElementById("faqContainer");
 
 function appendMessage(text, sender) {
   const msg = document.createElement("div");
@@ -61,71 +95,70 @@ function appendMessage(text, sender) {
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-function getFuzzyAnswer(input) {
-  const normalizedInput = input.toLowerCase();
-  const questions = Object.keys(questionsAndAnswers);
-  const match = questions.find(q => normalizedInput.includes(q)) ||
-    questions.find(q => similarity(normalizedInput, q) > 0.6);
-  return match ? questionsAndAnswers[match] : "I'm sorry, I couldn't find an answer to that.";
-}
+function getClosestMatch(input) {
+  input = input.toLowerCase();
+  let bestMatch = "";
+  let highestScore = 0;
 
-function similarity(s1, s2) {
-  const longer = s1.length > s2.length ? s1 : s2;
-  const shorter = s1.length > s2.length ? s2 : s1;
-  const longerLength = longer.length;
-  if (longerLength === 0) return 1.0;
-  return (longerLength - editDistance(longer, shorter)) / parseFloat(longerLength);
-}
+  for (const question in questionsAndAnswers) {
+    let score = 0;
+    const inputWords = input.split(" ");
+    const questionWords = question.split(" ");
 
-function editDistance(s1, s2) {
-  const costs = [];
-  for (let i = 0; i <= s1.length; i++) {
-    let lastValue = i;
-    for (let j = 0; j <= s2.length; j++) {
-      if (i === 0)
-        costs[j] = j;
-      else if (j > 0) {
-        let newValue = costs[j - 1];
-        if (s1.charAt(i - 1) !== s2.charAt(j - 1))
-          newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
-        costs[j - 1] = lastValue;
-        lastValue = newValue;
-      }
+    inputWords.forEach(word => {
+      if (questionWords.includes(word)) score++;
+    });
+
+    if (score > highestScore) {
+      highestScore = score;
+      bestMatch = question;
     }
-    if (i > 0) costs[s2.length] = lastValue;
   }
-  return costs[s2.length];
+
+  return highestScore >= 2 ? bestMatch : null;
 }
 
-// Handle question input
 chatForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const input = userInput.value.trim();
   if (!input) return;
   appendMessage(input, "user");
   userInput.value = "";
+
   setTimeout(() => {
-    const response = getFuzzyAnswer(input);
-    appendMessage(response, "bot");
-  }, 500);
+    const match = getClosestMatch(input);
+    if (match) {
+      appendMessage(questionsAndAnswers[match], "bot");
+    } else {
+      appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below.", "bot");
+    }
+  }, 600);
 });
 
-// Collapsible FAQ groups
-document.querySelectorAll(".collapsible").forEach(button => {
-  button.addEventListener("click", function () {
-    this.classList.toggle("active");
-    const content = this.nextElementSibling;
-    content.style.display = content.style.display === "flex" ? "none" : "flex";
-  });
-});
+function renderFAQ() {
+  for (const group in faqStructure) {
+    const details = document.createElement("details");
+    const summary = document.createElement("summary");
+    summary.textContent = group;
+    details.appendChild(summary);
 
-// Add FAQ button responses
-document.querySelectorAll(".faq-content button").forEach(button => {
-  button.addEventListener("click", () => {
-    const question = button.textContent.toLowerCase().replace(/\?$/, '');
-    appendMessage(button.textContent, "user");
-    setTimeout(() => {
-      appendMessage(questionsAndAnswers[question], "bot");
-    }, 400);
-  });
-});
+    faqStructure[group].forEach((questionKey) => {
+      const btn = document.createElement("button");
+      btn.textContent = questionKey.charAt(0).toUpperCase() + questionKey.slice(1) + "?";
+      btn.onclick = () => {
+        appendMessage(btn.textContent, "user");
+        setTimeout(() => {
+          appendMessage(questionsAndAnswers[questionKey], "bot");
+        }, 500);
+      };
+      details.appendChild(btn);
+    });
+
+    faqContainer.appendChild(details);
+  }
+}
+
+window.onload = () => {
+  appendMessage("Hi, I'm James. Ask me anything about jury duty or pick a question below.", "bot");
+  renderFAQ();
+};
