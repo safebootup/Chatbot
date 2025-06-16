@@ -1,4 +1,3 @@
-// Data: grouped questions & answers
 const questionsAndAnswers = {
   "how did i get picked for jury service":
     "From a combined list of registered Philadelphia voters and adult licensed drivers, jurors are randomly selected by computer.",
@@ -38,17 +37,16 @@ const questionsAndAnswers = {
     "Call the Jury Commission Payroll Dept at 215-683-7193."
 };
 
-// Group definitions
 const groupedQuestions = {
   "Jury Selection": [
     "how did i get picked for jury service",
     "why have some people never been called for jury service and i've been called more than once",
-    "what if i fail to return the questionnaire or report for service"
+    "what if i fail to return the questionnaire or report"
   ],
   "Scheduling": [
     "what if the date i'm called to serve is not convenient"
   ],
-  "Payment/Work Hours": [
+  "Payment / Work Hours": [
     "will i get paid for serving as a juror",
     "how long will i be required to serve",
     "how often must i serve",
@@ -77,54 +75,45 @@ const groupedQuestions = {
 
 const chatBox = document.getElementById("chatBox");
 const questionList = document.getElementById("questionList");
-const questionTree = document.getElementById("questionTree");
 const chatForm = document.getElementById("chatForm");
 const userInput = document.getElementById("userInput");
 
-// Bot details
+// Add chatbot avatar URL here (random male avatar)
+const botAvatarUrl = "https://randomuser.me/api/portraits/men/32.jpg"; // Random male avatar
 const botName = "James";
-const botAvatar = "https://randomuser.me/api/portraits/men/65.jpg"; // Random male avatar
 
-// Append a message to chat
+// Initialize bot with welcome message
+appendMessage("How may I help you?", "bot");
+
 function appendMessage(text, sender) {
   const msg = document.createElement("div");
   msg.classList.add("message", sender);
 
   if (sender === "bot") {
     const avatar = document.createElement("img");
-    avatar.src = botAvatar;
-    avatar.alt = `${botName} avatar`;
-    avatar.className = "avatar";
+    avatar.src = botAvatarUrl;
+    avatar.alt = botName;
+    avatar.classList.add("avatar");
 
-    const content = document.createElement("div");
-    content.className = "content";
+    const nameSpan = document.createElement("span");
+    nameSpan.textContent = botName;
+    nameSpan.classList.add("bot-name");
 
-    const name = document.createElement("div");
-    name.textContent = botName;
-    name.className = "name";
-
-    const bubble = document.createElement("div");
-    bubble.textContent = text;
-    bubble.className = "bubble";
-
-    content.appendChild(name);
-    content.appendChild(bubble);
+    const textDiv = document.createElement("div");
+    textDiv.textContent = text;
+    textDiv.classList.add("text");
 
     msg.appendChild(avatar);
-    msg.appendChild(content);
+    msg.appendChild(nameSpan);
+    msg.appendChild(textDiv);
   } else {
-    // user message bubble only
-    const bubble = document.createElement("div");
-    bubble.textContent = text;
-    bubble.className = "bubble";
-    msg.appendChild(bubble);
+    msg.textContent = text;
   }
 
   chatBox.appendChild(msg);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-// Returns bot response for input
 function getBotResponse(input) {
   const cleanInput = input.toLowerCase().trim();
   for (const question in questionsAndAnswers) {
@@ -132,10 +121,10 @@ function getBotResponse(input) {
       return questionsAndAnswers[question];
     }
   }
-  return "I'm sorry, I couldn't find an answer to that. Please try one of the questions below.";
+  return "I'm sorry, I couldn't find an answer to that. Try selecting a question below.";
 }
 
-// Handle form submit
+// Handle text input submit
 chatForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const input = userInput.value.trim();
@@ -148,75 +137,60 @@ chatForm.addEventListener("submit", (e) => {
   }, 600);
 });
 
-// Populate quick question buttons below chat
-Object.keys(questionsAndAnswers).forEach((question) => {
-  const btn = document.createElement("button");
-  btn.textContent = question.charAt(0).toUpperCase() + question.slice(1) + "?";
-  btn.onclick = () => {
-    appendMessage(btn.textContent, "user");
-    setTimeout(() => {
-      appendMessage(questionsAndAnswers[question], "bot");
-    }, 500);
-  };
-  questionList.appendChild(btn);
-});
+// Populate grouped quick question buttons below chat
+questionList.innerHTML = ""; // Clear existing
 
-// Build collapsible question tree
-function buildQuestionTree() {
-  for (const group in groupedQuestions) {
-    const groupDiv = document.createElement("div");
-    groupDiv.classList.add("group");
+for (const group in groupedQuestions) {
+  const groupContainer = document.createElement("div");
+  groupContainer.style.marginBottom = "14px";
 
-    const header = document.createElement("div");
-    header.classList.add("group-header");
-    header.tabIndex = 0; // make keyboard focusable
+  const groupTitle = document.createElement("h4");
+  groupTitle.textContent = group;
+  groupTitle.style.color = "#4eaaff";
+  groupTitle.style.marginBottom = "6px";
+  groupTitle.style.fontWeight = "700";
+  groupTitle.style.fontSize = "16px";
+  groupContainer.appendChild(groupTitle);
 
-    const title = document.createElement("span");
-    title.textContent = group;
+  const btnWrapper = document.createElement("div");
+  btnWrapper.style.display = "flex";
+  btnWrapper.style.flexWrap = "wrap";
+  btnWrapper.style.gap = "8px";
 
-    const toggleIcon = document.createElement("span");
-    toggleIcon.classList.add("toggle-icon");
-    toggleIcon.textContent = "+";
+  groupedQuestions[group].forEach(questionKey => {
+    if (!(questionKey in questionsAndAnswers)) return;
 
-    header.appendChild(title);
-    header.appendChild(toggleIcon);
-    groupDiv.appendChild(header);
+    const btn = document.createElement("button");
+    btn.textContent = questionKey.charAt(0).toUpperCase() + questionKey.slice(1) + "?";
+    btn.style.backgroundColor = "#292929";
+    btn.style.color = "#4eaaff";
+    btn.style.border = "1.5px solid #4eaaff";
+    btn.style.padding = "6px 14px";
+    btn.style.borderRadius = "12px";
+    btn.style.fontSize = "14px";
+    btn.style.cursor = "pointer";
+    btn.style.fontWeight = "600";
+    btn.style.transition = "background-color 0.3s ease, color 0.3s ease";
 
-    const questionsList = document.createElement("div");
-    questionsList.classList.add("questions-list");
+    btn.onmouseover = () => {
+      btn.style.backgroundColor = "#4eaaff";
+      btn.style.color = "#121212";
+    };
+    btn.onmouseout = () => {
+      btn.style.backgroundColor = "#292929";
+      btn.style.color = "#4eaaff";
+    };
 
-    groupedQuestions[group].forEach(q => {
-      const qBtn = document.createElement("button");
-      qBtn.textContent = q.charAt(0).toUpperCase() + q.slice(1) + "?";
-      qBtn.onclick = () => {
-        appendMessage(qBtn.textContent, "user");
-        setTimeout(() => {
-          appendMessage(questionsAndAnswers[q] || "Sorry, answer not found.", "bot");
-        }, 300);
-      };
-      questionsList.appendChild(qBtn);
-    });
+    btn.onclick = () => {
+      appendMessage(btn.textContent, "user");
+      setTimeout(() => {
+        appendMessage(questionsAndAnswers[questionKey], "bot");
+      }, 500);
+    };
 
-    groupDiv.appendChild(questionsList);
+    btnWrapper.appendChild(btn);
+  });
 
-    // Toggle on click
-    header.addEventListener("click", () => {
-      const isOpen = groupDiv.classList.toggle("open");
-      toggleIcon.textContent = isOpen ? "−" : "+";
-    });
-
-    // Toggle with keyboard (Enter or Space)
-    header.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        header.click();
-      }
-    });
-
-    questionTree.appendChild(groupDiv);
-  }
+  groupContainer.appendChild(btnWrapper);
+  questionList.appendChild(groupContainer);
 }
-
-// Initialize bot with welcome message and build tree
-appendMessage("How may I help you?", "bot");
-buildQuestionTree();
