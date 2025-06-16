@@ -53,7 +53,6 @@ function appendMessage(text, sender) {
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-// Helper function to calculate simple similarity between two strings
 function similarity(str1, str2) {
   const words1 = str1.split(/\s+/);
   const words2 = str2.split(/\s+/);
@@ -80,7 +79,6 @@ function getBotResponse(input) {
     }
   }
 
-  // Only respond if similarity is above threshold (0.4 here)
   if (highestScore > 0.4) {
     return questionsAndAnswers[bestMatch];
   } else {
@@ -88,7 +86,6 @@ function getBotResponse(input) {
   }
 }
 
-// Handle text input submit
 chatForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const input = userInput.value.trim();
@@ -101,7 +98,7 @@ chatForm.addEventListener("submit", (e) => {
   }, 600);
 });
 
-// Populate clickable questions
+// Populate clickable questions below input
 Object.keys(questionsAndAnswers).forEach((question) => {
   const btn = document.createElement("button");
   btn.textContent = question.charAt(0).toUpperCase() + question.slice(1) + "?";

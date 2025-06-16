@@ -1,83 +1,77 @@
 body {
   font-family: Arial, sans-serif;
-  background: #f4f4f4;
-  padding: 20px;
+  margin: 20px;
+  background: #f5f5f5;
 }
-
 .chat-container {
   max-width: 600px;
-  margin: auto;
+  margin: 0 auto;
   background: white;
-  padding: 20px;
-  border-radius: 10px;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
-
 .chat-box {
   height: 300px;
   overflow-y: auto;
   border: 1px solid #ccc;
   padding: 10px;
   margin-bottom: 10px;
+  background: #fafafa;
 }
-
 .message {
   margin: 5px 0;
-  padding: 8px 12px;
+  padding: 7px 10px;
   border-radius: 5px;
+  max-width: 80%;
 }
-
-.message.user {
-  background-color: #d1e7fd;
-  text-align: right;
-}
-
 .message.bot {
-  background-color: #eee;
-  text-align: left;
+  background: #e1e1e1;
+  align-self: flex-start;
 }
-
+.message.user {
+  background: #0084ff;
+  color: white;
+  align-self: flex-end;
+  margin-left: auto;
+}
 form {
   display: flex;
-  gap: 10px;
   margin-bottom: 10px;
 }
-
 input[type="text"] {
-  flex: 1;
+  flex-grow: 1;
   padding: 8px;
+  font-size: 16px;
+  border-radius: 4px 0 0 4px;
+  border: 1px solid #ccc;
+  border-right: none;
 }
-
 button {
-  padding: 8px 12px;
-  cursor: pointer;
-  border: none;
-  border-radius: 4px;
-  background: #007bff;
+  padding: 8px 15px;
+  font-size: 16px;
+  border: 1px solid #0084ff;
+  background: #0084ff;
   color: white;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
 }
-
-.category-list {
-  margin-top: 10px;
+button:hover {
+  background: #005fa3;
+  border-color: #005fa3;
 }
-
-.category-wrapper {
-  margin-bottom: 10px;
-}
-
-.category-toggle {
+.question-list button {
+  display: block;
   width: 100%;
+  margin: 4px 0;
+  padding: 8px;
+  font-size: 14px;
+  border-radius: 4px;
+  border: 1px solid #0084ff;
+  background: white;
+  cursor: pointer;
   text-align: left;
-  font-weight: bold;
-  background-color: #0056b3;
 }
-
-.question-sublist {
-  display: none;
-  margin-top: 5px;
-  padding-left: 10px;
-}
-
-.question-sublist button {
-  background-color: #17a2b8;
-  margin: 2px 0;
+.question-list button:hover {
+  background: #dbe9ff;
 }
