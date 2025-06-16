@@ -8,8 +8,17 @@
 <body>
   <div class="chat-container">
     <div class="chat-box" id="chatBox"></div>
+
+    <form id="chatForm">
+      <input type="text" id="userInput" placeholder="Type your question here..." autocomplete="off" />
+      <button type="submit">Send</button>
+    </form>
+
+    <h3>Or select a category below:</h3>
+    <div class="category-list" id="categoryList"></div>
     <div class="question-list" id="questionList"></div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
