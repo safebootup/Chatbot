@@ -1,3 +1,40 @@
+// Data structure for Q&A with grouping
+const groupedQuestions = {
+  "Jury Selection": [
+    "how did i get picked for jury service",
+    "why have some people never been called for jury service and i've been called more than once",
+    "what if i fail to return the questionnaire or report for service"
+  ],
+  "Scheduling": [
+    "what if the date i'm called to serve is not convenient"
+  ],
+  "Payment/Work Hours": [
+    "will i get paid for serving as a juror",
+    "how long will i be required to serve",
+    "how often must i serve",
+    "does my employer have to pay me for jury service",
+    "what is considered an extreme hardship",
+    "where can i park"
+  ],
+  "Requirements for Jury Duty": [
+    "can i bring electronics",
+    "how often must i serve",
+    "i lost my summons how do i get a new one",
+    "what form of id is needed when inquiring about my summons",
+    "why am i told to call the night before",
+    "what if i fail to return the questionnaire or report",
+    "what should i wear"
+  ],
+  "Time Conflicts": [
+    "how long will i be required to serve",
+    "how often must i serve",
+    "does my employer have to pay me for jury service",
+    "what if the date i'm called to serve is not convenient",
+    "what is considered an extreme hardship",
+    "if i am excused by the voice response system when will i have to report again"
+  ]
+};
+
 const questionsAndAnswers = {
   "how did i get picked for jury service":
     "From a combined list of registered Philadelphia voters and adult licensed drivers, jurors are randomly selected by computer.",
@@ -41,6 +78,7 @@ const chatBox = document.getElementById("chatBox");
 const questionList = document.getElementById("questionList");
 const chatForm = document.getElementById("chatForm");
 const userInput = document.getElementById("userInput");
+const questionTree = document.getElementById("questionTree");
 
 // Initialize bot with welcome message
 appendBotMessage("How may I help you?");
@@ -60,62 +98,8 @@ function appendBotMessage(text) {
   msg.classList.add("message", "bot");
 
   const avatar = document.createElement("img");
-  avatar.src = "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Profile_avatar_placeholder_large.png/512px-Profile_avatar_placeholder_large.png";
+  avatar.src = "https://randomuser.me/api/portraits/men/75.jpg"; // Random male avatar
   avatar.alt = "James Avatar";
   avatar.classList.add("avatar");
 
-  const content = document.createElement("div");
-  content.classList.add("bot-message-content");
-
-  const name = document.createElement("div");
-  name.classList.add("bot-name");
-  name.textContent = "James";
-
-  const messageText = document.createElement("div");
-  messageText.classList.add("bot-text");
-  messageText.textContent = text;
-
-  content.appendChild(name);
-  content.appendChild(messageText);
-  msg.appendChild(avatar);
-  msg.appendChild(content);
-
-  chatBox.appendChild(msg);
-  chatBox.scrollTop = chatBox.scrollHeight;
-}
-
-function getBotResponse(input) {
-  const cleanInput = input.toLowerCase().trim();
-  for (const question in questionsAndAnswers) {
-    if (cleanInput.includes(question)) {
-      return questionsAndAnswers[question];
-    }
-  }
-  return "I'm sorry, I couldn't find an answer to that. Try selecting a question below.";
-}
-
-// Handle text input submit
-chatForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const input = userInput.value.trim();
-  if (!input) return;
-  appendUserMessage(input);
-  userInput.value = "";
-  setTimeout(() => {
-    const response = getBotResponse(input);
-    appendBotMessage(response);
-  }, 600);
-});
-
-// Populate clickable questions
-Object.keys(questionsAndAnswers).forEach((question) => {
-  const btn = document.createElement("button");
-  btn.textContent = question.charAt(0).toUpperCase() + question.slice(1) + "?";
-  btn.onclick = () => {
-    appendUserMessage(btn.textContent);
-    setTimeout(() => {
-      appendBotMessage(questionsAndAnswers[question]);
-    }, 500);
-  };
-  questionList.appendChild(btn);
-});
+  const content = document.createE
