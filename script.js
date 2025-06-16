@@ -1,61 +1,49 @@
 const questionsAndAnswers = {
-  "How did I get picked for jury service?":
-    "From a combined list of registered Philadelphia voters and adult licensed drivers, the required number of jurors for a particular day are randomly selected by computer and summoned to appear for jury duty.",
-
-  "How often must I serve?":
-    "If a person serves for one or two days, they need not serve again for a period of one year. If service is for three or more days, the exemption period is three years.",
-
-  "I lost my Summons how do I get a new one?":
-    "Call 215 683-7170 and either follow the prompts to request a new summons or press '4' then '0' to speak to a representative. Available Mon–Fri 8:30 AM – 3:30 PM.",
-
-  "Why have some people never been called for jury service and I've been called more than once?":
-    "Selection is random. Differences in how your name appears on voter/DMV lists can increase chances of selection. The court cannot modify these lists.",
-
-  "How long will I be required to serve?":
-    "You will be required to serve for one day unless selected for a trial, in which case you must serve for the length of the trial.",
-
-  "Will I get paid for serving as a juror?":
-    "Yes. $9/day for the first three days, $25/day after that. A check is mailed after your service ends.",
-
-  "Does my employer have to pay me for time missed from work due to jury service?":
-    "Employers aren’t required to pay you, but they cannot penalize you for attending jury duty.",
-
-  "What if the date I'm called to serve is not convenient?":
-    "Complete your questionnaire and request a new date via phone or online. Hardship requests must be mailed with proof.",
-
-  "What is considered an extreme hardship?":
-    "Loss of wages, child care issues, or caregiver duties. Verification is required. Call 215-683-7170 with questions.",
-
-  "What form of ID is needed when inquiring about the status of a summons?":
-    "Provide full name, mailing address, date of birth, and participant number. Never provide your SSN.",
-
-  "If I am excused by the voice system, when will I have to report again?":
-    "If excused, you are treated as if you served. You won’t be required again for at least 12 months.",
-
-  "Why am I told to call the night before I report?":
-    "The court may not need all jurors. Call the night before to find out if you must report the next day.",
-
-  "What should I bring when I report?":
-    "Bring your summons and something to read. You’ll spend time waiting.",
-
-  "What if I fail to return the questionnaire or report for service?":
-    "You may be held in contempt and fined. The court tries to be flexible to avoid this.",
-
-  "What should I wear?":
-    "Dress casually but respectfully. No need for ties. Slacks, sport shirts, and dresses are appropriate.",
-
-  "Can I bring electronics into the courthouse?":
-    "Yes, but turn them off in courtrooms unless told otherwise by court staff.",
-
-  "Where can I park?":
-    "Use public transport if possible. Visit SEPTA and Philadelphia Parking Authority websites for help.",
-
-  "Who do I talk to about my jury check?":
-    "Contact the Jury Commission Payroll Department at 215-683-7193."
+  "how did i get picked for jury service":
+    "From a combined list of registered Philadelphia voters and adult licensed drivers, jurors are randomly selected by computer.",
+  "how often must i serve":
+    "If you serve 1–2 days, you're exempt for 1 year. If you serve 3+ days, you're exempt for 3 years.",
+  "i lost my summons how do i get a new one":
+    "Call 215 683-7170 and follow prompts or speak to a representative, available Mon–Fri 8:30 AM – 3:30 PM.",
+  "why have some people never been called for jury service and i've been called more than once":
+    "Selection is random. Duplicate name formats on different lists can increase chances. The court cannot alter the lists.",
+  "how long will i be required to serve":
+    "You must serve one day unless selected for a trial, then for the trial duration.",
+  "will i get paid for serving as a juror":
+    "Yes. $9/day for the first 3 days, $25/day after. A check will be mailed after your service.",
+  "does my employer have to pay me for jury service":
+    "No, but they can’t punish you for attending. Employers are not required to pay you.",
+  "what if the date i'm called to serve is not convenient":
+    "Fill out your questionnaire and request a new date by phone or online. Hardship requests must be mailed.",
+  "what is considered an extreme hardship":
+    "Childcare, lost wages, or caregiving issues. Documentation required. Call 215-683-7170 with questions.",
+  "what form of id is needed when inquiring about my summons":
+    "Name, address, date of birth, and participant number (if known). Never your SSN.",
+  "if i am excused by the voice response system when will i have to report again":
+    "You’re treated as if you served and won’t be required again for 12 months.",
+  "why am i told to call the night before":
+    "To check if you’re still needed, since juror demand changes daily. Call the night before to confirm.",
+  "what should i bring when i report":
+    "Bring your summons and something to read while waiting.",
+  "what if i fail to return the questionnaire or report":
+    "You may be held in contempt and fined. The court tries to avoid using this option.",
+  "what should i wear":
+    "Casual, respectful clothing. Ties not required. Slacks, dresses, or sport shirts are appropriate.",
+  "can i bring electronics":
+    "Yes, but they must be turned off in the courtroom unless otherwise instructed.",
+  "where can i park":
+    "Use public transit if possible. See the SEPTA or Philadelphia Parking Authority websites.",
+  "who do i talk to about my jury check":
+    "Call the Jury Commission Payroll Dept at 215-683-7193."
 };
 
 const chatBox = document.getElementById("chatBox");
 const questionList = document.getElementById("questionList");
+const chatForm = document.getElementById("chatForm");
+const userInput = document.getElementById("userInput");
+
+// Initialize bot with welcome message
+appendMessage("How may I help you?", "bot");
 
 function appendMessage(text, sender) {
   const msg = document.createElement("div");
@@ -65,16 +53,38 @@ function appendMessage(text, sender) {
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-function handleQuestionClick(question) {
-  appendMessage(question, "user");
-  setTimeout(() => {
-    appendMessage(questionsAndAnswers[question], "bot");
-  }, 500); // 0.5s delay for realism
+function getBotResponse(input) {
+  const cleanInput = input.toLowerCase().trim();
+  for (const question in questionsAndAnswers) {
+    if (cleanInput.includes(question)) {
+      return questionsAndAnswers[question];
+    }
+  }
+  return "I'm sorry, I couldn't find an answer to that. Try selecting a question below.";
 }
 
+// Handle text input submit
+chatForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const input = userInput.value.trim();
+  if (!input) return;
+  appendMessage(input, "user");
+  userInput.value = "";
+  setTimeout(() => {
+    const response = getBotResponse(input);
+    appendMessage(response, "bot");
+  }, 600);
+});
+
+// Populate clickable questions
 Object.keys(questionsAndAnswers).forEach((question) => {
   const btn = document.createElement("button");
-  btn.textContent = question;
-  btn.onclick = () => handleQuestionClick(question);
+  btn.textContent = question.charAt(0).toUpperCase() + question.slice(1) + "?";
+  btn.onclick = () => {
+    appendMessage(btn.textContent, "user");
+    setTimeout(() => {
+      appendMessage(questionsAndAnswers[question], "bot");
+    }, 500);
+  };
   questionList.appendChild(btn);
 });
