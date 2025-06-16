@@ -1,11 +1,8 @@
 const questionsAndAnswers = {
-  // Jury Selection
   "how did i get picked for jury service":
     "From a combined list of registered Philadelphia voters and adult licensed drivers, jurors are randomly selected by computer.",
   "why have some people never been called for jury service and i've been called more than once":
     "Selection is random. Duplicate name formats on different lists can increase chances. The court cannot alter the lists.",
-
-  // Scheduling & Time Conflicts
   "what if the date i'm called to serve is not convenient":
     "Fill out your questionnaire and request a new date by phone or online. Hardship requests must be mailed.",
   "if i am excused by the voice response system when will i have to report again":
@@ -18,14 +15,10 @@ const questionsAndAnswers = {
     "No, but they can’t punish you for attending. Employers are not required to pay you.",
   "what is considered an extreme hardship":
     "Childcare, lost wages, or caregiving issues. Documentation required. Call 215-683-7170 with questions.",
-
-  // Payment
   "will i get paid for serving as a juror":
     "Yes. $9/day for the first 3 days, $25/day after. A check will be mailed after your service.",
   "who do i talk to about my jury check":
     "Call the Jury Commission Payroll Dept at 215-683-7193.",
-
-  // Logistics & Requirements
   "can i bring electronics":
     "Yes, but they must be turned off in the courtroom unless otherwise instructed.",
   "i lost my summons how do i get a new one":
@@ -42,7 +35,6 @@ const questionsAndAnswers = {
     "Use public transit if possible. See the SEPTA or Philadelphia Parking Authority websites."
 };
 
-// Grouped categories
 const questionCategories = {
   "Jury Selection": [
     "how did i get picked for jury service",
@@ -75,7 +67,6 @@ const chatBox = document.getElementById("chatBox");
 const chatForm = document.getElementById("chatForm");
 const userInput = document.getElementById("userInput");
 const categoryList = document.getElementById("categoryList");
-const questionList = document.getElementById("questionList");
 
 appendMessage("How may I help you?", "bot");
 
@@ -94,7 +85,7 @@ function getBotResponse(input) {
       return questionsAndAnswers[question];
     }
   }
-  return "I'm sorry, I couldn't find an answer to that. Try selecting a category.";
+  return "I'm sorry, I couldn't find an answer to that. Try selecting a category below.";
 }
 
 chatForm.addEventListener("submit", (e) => {
@@ -109,17 +100,19 @@ chatForm.addEventListener("submit", (e) => {
   }, 600);
 });
 
-// Show categories on page load
-Object.keys(questionCategories).forEach((category) => {
-  const btn = document.createElement("button");
-  btn.textContent = category;
-  btn.onclick = () => showQuestions(category);
-  categoryList.appendChild(btn);
-});
+// Build expandable tree
+Object.entries(questionCategories).forEach(([category, questions]) => {
+  const wrapper = document.createElement("div");
+  wrapper.className = "category-wrapper";
 
-function showQuestions(category) {
-  questionList.innerHTML = "";
-  const questions = questionCategories[category];
+  const toggle = document.createElement("button");
+  toggle.className = "category-toggle";
+  toggle.textContent = category;
+  toggle.setAttribute("data-open", "false");
+
+  const sublist = document.createElement("div");
+  sublist.className = "question-sublist";
+
   questions.forEach((q) => {
     const btn = document.createElement("button");
     btn.textContent = q.charAt(0).toUpperCase() + q.slice(1) + "?";
@@ -129,6 +122,16 @@ function showQuestions(category) {
         appendMessage(questionsAndAnswers[q], "bot");
       }, 500);
     };
-    questionList.appendChild(btn);
+    sublist.appendChild(btn);
   });
-}
+
+  toggle.onclick = () => {
+    const open = toggle.getAttribute("data-open") === "true";
+    toggle.setAttribute("data-open", !open);
+    sublist.style.display = open ? "none" : "block";
+  };
+
+  wrapper.appendChild(toggle);
+  wrapper.appendChild(sublist);
+  categoryList.appendChild(wrapper);
+});
