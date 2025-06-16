@@ -10,12 +10,18 @@
     <div class="chat-box" id="chatBox"></div>
 
     <form id="chatForm">
-      <input type="text" id="userInput" placeholder="Type your question here..." autocomplete="off" />
+      <input
+        type="text"
+        id="userInput"
+        placeholder="Type your question here..."
+        autocomplete="off"
+        aria-label="Chat input"
+      />
       <button type="submit">Send</button>
     </form>
 
-    <h3>Or select a question below:</h3>
-    <div class="question-list" id="questionList"></div>
+    <h3>Or browse questions by category:</h3>
+    <div id="questionTree"></div>
   </div>
 
   <script src="script.js"></script>
