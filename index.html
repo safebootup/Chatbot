@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Jury Service Chatbot - Dark Themed with Collapsible Tree</title>
-<link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jury FAQ Chatbot</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div id="chatContainer">
+    <div id="chatBox" class="chat-box"></div>
 
-<div class="container">
+    <form id="chatForm" autocomplete="off">
+      <input
+        type="text"
+        id="userInput"
+        placeholder="Ask a question or select below..."
+        spellcheck="false"
+      />
+      <button type="submit">Send</button>
+    </form>
 
-  <div id="chatBox" aria-live="polite" aria-label="Chat messages"></div>
+    <div id="questionList" class="faq-list"></div>
+  </div>
 
-  <form id="chatForm" aria-label="Send your message">
-    <input type="text" id="userInput" placeholder="Type your question here..." aria-required="true" autocomplete="off" />
-    <button type="submit" aria-label="Send message">Send</button>
-  </form>
-
-  <h3>Or select a question below:</h3>
-  <div id="questionList" aria-label="Quick question buttons"></div>
-
-  <h3>Frequently Asked Questions</h3>
-  <div id="questionTree" aria-label="Collapsible question tree"></div>
-
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

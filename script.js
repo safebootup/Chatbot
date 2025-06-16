@@ -78,11 +78,9 @@ const questionList = document.getElementById("questionList");
 const chatForm = document.getElementById("chatForm");
 const userInput = document.getElementById("userInput");
 
-// Add chatbot avatar URL here (random male avatar)
-const botAvatarUrl = "https://randomuser.me/api/portraits/men/32.jpg"; // Random male avatar
+const botAvatarUrl = "https://randomuser.me/api/portraits/men/32.jpg";
 const botName = "James";
 
-// Initialize bot with welcome message
 appendMessage("How may I help you?", "bot");
 
 function appendMessage(text, sender) {
@@ -124,7 +122,6 @@ function getBotResponse(input) {
   return "I'm sorry, I couldn't find an answer to that. Try selecting a question below.";
 }
 
-// Handle text input submit
 chatForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const input = userInput.value.trim();
@@ -137,49 +134,26 @@ chatForm.addEventListener("submit", (e) => {
   }, 600);
 });
 
-// Populate grouped quick question buttons below chat
-questionList.innerHTML = ""; // Clear existing
+// Build collapsible question groups
+questionList.innerHTML = "";
 
 for (const group in groupedQuestions) {
   const groupContainer = document.createElement("div");
-  groupContainer.style.marginBottom = "14px";
+  groupContainer.classList.add("faq-group");
 
-  const groupTitle = document.createElement("h4");
-  groupTitle.textContent = group;
-  groupTitle.style.color = "#4eaaff";
-  groupTitle.style.marginBottom = "6px";
-  groupTitle.style.fontWeight = "700";
-  groupTitle.style.fontSize = "16px";
-  groupContainer.appendChild(groupTitle);
+  const groupHeader = document.createElement("button");
+  groupHeader.classList.add("collapsible");
+  groupHeader.textContent = group;
 
-  const btnWrapper = document.createElement("div");
-  btnWrapper.style.display = "flex";
-  btnWrapper.style.flexWrap = "wrap";
-  btnWrapper.style.gap = "8px";
+  const questionsContainer = document.createElement("div");
+  questionsContainer.classList.add("content");
 
-  groupedQuestions[group].forEach(questionKey => {
+  groupedQuestions[group].forEach((questionKey) => {
     if (!(questionKey in questionsAndAnswers)) return;
 
     const btn = document.createElement("button");
+    btn.classList.add("question-btn");
     btn.textContent = questionKey.charAt(0).toUpperCase() + questionKey.slice(1) + "?";
-    btn.style.backgroundColor = "#292929";
-    btn.style.color = "#4eaaff";
-    btn.style.border = "1.5px solid #4eaaff";
-    btn.style.padding = "6px 14px";
-    btn.style.borderRadius = "12px";
-    btn.style.fontSize = "14px";
-    btn.style.cursor = "pointer";
-    btn.style.fontWeight = "600";
-    btn.style.transition = "background-color 0.3s ease, color 0.3s ease";
-
-    btn.onmouseover = () => {
-      btn.style.backgroundColor = "#4eaaff";
-      btn.style.color = "#121212";
-    };
-    btn.onmouseout = () => {
-      btn.style.backgroundColor = "#292929";
-      btn.style.color = "#4eaaff";
-    };
 
     btn.onclick = () => {
       appendMessage(btn.textContent, "user");
@@ -188,9 +162,23 @@ for (const group in groupedQuestions) {
       }, 500);
     };
 
-    btnWrapper.appendChild(btn);
+    questionsContainer.appendChild(btn);
   });
 
-  groupContainer.appendChild(btnWrapper);
+  groupContainer.appendChild(groupHeader);
+  groupContainer.appendChild(questionsContainer);
   questionList.appendChild(groupContainer);
 }
+
+// Collapsible toggle logic
+document.querySelectorAll(".collapsible").forEach((button) => {
+  button.addEventListener("click", () => {
+    button.classList.toggle("active");
+    const content = button.nextElementSibling;
+    if (content.style.maxHeight) {
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    }
+  });
+});
