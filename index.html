@@ -2,25 +2,20 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Jury FAQ Chatbot</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Jury Service Chatbot</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="chatContainer">
-    <div id="chatBox" class="chat-box"></div>
+  <div class="chat-container">
+    <div class="chat-box" id="chatBox"></div>
 
-    <form id="chatForm" autocomplete="off">
-      <input
-        type="text"
-        id="userInput"
-        placeholder="Ask a question or select below..."
-        spellcheck="false"
-      />
+    <form id="chatForm">
+      <input type="text" id="userInput" placeholder="Type your question here..." autocomplete="off" />
       <button type="submit">Send</button>
     </form>
 
-    <div id="questionList" class="faq-list"></div>
+    <h3>Frequently Asked Questions</h3>
+    <div class="faq-container" id="faqContainer"></div>
   </div>
 
   <script src="script.js"></script>
