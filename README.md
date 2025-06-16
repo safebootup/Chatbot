@@ -1,2 +1,3 @@
 This file contains the questions from the FAQ page on the jury section of the website. When prompted, the user will click the desired question and an automated "chatbot" will respond with the automated answers that were inputted.
-It will seem to the user like they are communicating with someone but in reality it is just automation.
+The chatbot also allows users to type in their questions and if it is relatively close to a question from the FAQ, it will answer accordingly.
+It will seem to the user like they are communicating with someone but in reality it is just automation.-- I am looking into giving the chatbot a name an nd potentially a little picture to appear as if it is a human. 
