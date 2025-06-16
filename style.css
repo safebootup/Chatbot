@@ -1,150 +1,162 @@
 body {
   font-family: Arial, sans-serif;
-  margin: 20px;
-  background: #222; /* dark background for contrast */
-  color: #eee; /* light text */
+  background: #f4f4f4;
+  margin: 0;
+  padding: 20px;
 }
 
 .chat-container {
-  max-width: 650px;
-  margin: 0 auto;
-  background: #1e1e1e; /* slightly lighter dark */
-  padding: 20px;
+  max-width: 600px;
+  margin: auto;
+  background: white;
   border-radius: 8px;
-  box-shadow: 0 0 15px #000;
+  padding: 15px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 .chat-box {
   height: 300px;
   overflow-y: auto;
-  border: 1px solid #555;
-  background: #121212;
-  padding: 10px;
-  margin-bottom: 15px;
-  border-radius: 6px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  background: #222;
+  color: #eee;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.message {
+  margin-bottom: 8px;
+}
+
+.message.user {
+  text-align: right;
+  background: #0078d7;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 20px;
+  display: inline-block;
+  max-width: 80%;
+}
+
+.message.bot {
+  display: flex;
+  align-items: flex-start;
+  background: #444;
+  color: #eee;
+  padding: 10px 15px;
+  border-radius: 20px;
+  max-width: 80%;
+  margin: 6px 0;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+  flex-shrink: 0;
+  border: 2px solid #0078d7;
+}
+
+.bot-text-container {
   display: flex;
   flex-direction: column;
 }
 
-.message {
-  margin: 6px 0;
-  padding: 10px 15px;
-  border-radius: 20px;
-  max-width: 80%;
-  word-wrap: break-word;
+.bot-name {
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 4px;
+  color: #0099ff;
 }
 
-.message.bot {
-  background: #444;
-  color: #eee;
-  align-self: flex-start;
-}
-
-.message.user {
-  background: #0078d7;
-  color: #fff;
-  align-self: flex-end;
+.bot-text {
+  font-size: 16px;
+  white-space: pre-wrap;
 }
 
 form {
   display: flex;
-  margin-bottom: 20px;
-}
-
-input[type="text"] {
-  flex-grow: 1;
-  padding: 10px 15px;
-  font-size: 16px;
-  border-radius: 20px 0 0 20px;
-  border: 1px solid #555;
-  background: #333;
-  color: #eee;
-  outline: none;
-  border-right: none;
-  transition: border-color 0.3s ease;
-}
-
-input[type="text"]:focus {
-  border-color: #0078d7;
-  background: #222;
-}
-
-button {
-  padding: 10px 25px;
-  font-size: 16px;
-  border-radius: 0 20px 20px 0;
-  border: 1px solid #0078d7;
-  background: #0078d7;
-  color: #fff;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-button:hover {
-  background: #005a9e;
-  border-color: #005a9e;
-}
-
-/* Collapsible tree styles */
-.collapsible {
-  background-color: #333;
-  color: #eee;
-  cursor: pointer;
-  padding: 12px 18px;
-  width: 100%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 16px;
-  border-radius: 8px;
-  margin-bottom: 8px;
-  user-select: none;
-  transition: background-color 0.3s ease;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.collapsible:hover {
-  background-color: #444;
-}
-
-.collapsible:after {
-  content: '\25B6'; /* right-pointing arrow */
-  font-size: 12px;
-  transform: rotate(0deg);
-  transition: transform 0.3s ease;
-}
-
-.collapsible.active:after {
-  transform: rotate(90deg); /* down arrow when active */
-}
-
-.content {
-  background-color: #222;
-  overflow: hidden;
-  max-height: 0;
-  transition: max-height 0.3s ease;
-  border-radius: 0 0 8px 8px;
-  padding-left: 20px;
   margin-bottom: 15px;
 }
 
-.content button {
-  background: #555;
+input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 20px 0 0 20px;
+  border: 1px solid #ccc;
+  outline: none;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 0 20px 20px 0;
+  border: 1px solid #0078d7;
+  background-color: #0078d7;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005fa3;
+}
+
+.question-list button {
+  margin: 3px 5px 3px 0;
+  padding: 6px 10px;
   border: none;
-  color: #eee;
+  background-color: #eee;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.question-list button:hover {
+  background-color: #ddd;
+}
+
+/* Collapsible group styles */
+
+.group-title {
+  background-color: #0078d7;
+  color: white;
+  cursor: pointer;
   padding: 8px 12px;
-  margin: 5px 0;
+  margin-top: 10px;
+  border-radius: 8px;
+  user-select: none;
+}
+
+.group-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  background: #f9f9f9;
+  padding-left: 15px;
+  border-radius: 0 0 8px 8px;
+}
+
+.group-content.open {
+  padding: 10px 15px;
+  max-height: 1000px; /* large enough to show all content */
+}
+
+.group-content button {
+  display: block;
   width: 100%;
+  text-align: left;
+  background: white;
+  border: 1px solid #ccc;
+  margin: 5px 0;
+  padding: 8px 10px;
   border-radius: 6px;
   font-size: 14px;
   cursor: pointer;
-  text-align: left;
-  transition: background-color 0.3s ease;
 }
 
-.content button:hover {
-  background: #0078d7;
-  color: white;
+.group-content button:hover {
+  background-color: #eee;
 }
