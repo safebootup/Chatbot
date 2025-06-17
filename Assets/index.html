@@ -1,28 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Jury Service Chatbot</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  
   <div class="chat-container">
     <div class="chat-box" id="chatBox"></div>
 
     <form id="chatForm">
-      <input
-        type="text"
-        id="userInput"
-        placeholder="Type your question here..."
-        autocomplete="off"
-        aria-label="Chat input"
-      />
+      <input type="text" id="userInput" placeholder="Type your question here..." autocomplete="off" />
       <button type="submit">Send</button>
     </form>
 
-    <h3>Or browse questions by category:</h3>
-    <div id="questionTree"></div>
+    <h3>Or select a question below:</h3>
+    <div class="faq-group" id="faqContainer"></div>
   </div>
 
   <script src="script.js"></script>
