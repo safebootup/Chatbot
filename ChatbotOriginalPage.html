@@ -18,6 +18,40 @@
 <META NAME="GOOGLEBOT" CONTENT="NOARCHIVE"> 
 <META NAME="ROBOTS" CONTENT="NONE"> 
 <META HTTP-EQUIV="CACHE-CONTROL" CONTENT="NO-CACHE">
+<style>
+    .fixed-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .fixed-button:hover {
+      background-color: #0056b3;
+    }
+    #iframe-container {
+      position: fixed;
+      bottom: 70px; /* above the button */
+      right: 20px;
+      width: 400px;
+      height: 300px;
+      display: none; /* hidden initially */
+      border: 2px solid #ccc;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      z-index: 999;
+    }
+
+    #iframe-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+</style>
    <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico">
 
@@ -63,7 +97,16 @@
 <div class="wrapper">
     <!--=== Header v3 ===-->
     <div class="header-v3 header-sticky">
-	  
+	  <script>
+        function toggleIframe() {
+            const container = document.getElementById('iframe-container');
+            if (container.style.display === 'none') {
+                container.style.display = 'block';
+            } else {
+                container.style.display = 'none';
+            }
+            }
+      </script>
 	   <!-- Navbar -->
         <div class="navbar navbar-default mega-menu" role="navigation">
             <div class="container">
@@ -398,6 +441,7 @@
   gtag('js', new Date());
 
   gtag('config', 'G-1N6NMFKSKQ');
+  
 </script>
 
 <!--=== End Alert ===-->
@@ -592,8 +636,12 @@
 							</div>
                             
 							<div id="collapse-FAQ" class="panel-collapse collapse">
-                                
+
                                 <iframe src="Assets\index.html" width="600" height="600"></iframe>
+                                <button class="fixed-button" onclick="toggleIframe()">Chatbot Demo</button>
+                                <div id="iframe-container">
+                                    <iframe src="Assets\index.html"></iframe>
+                                </div>
                                 <!-- MY EMBED IS HERE -->
 								<div class="panel-body">
                                     <button class="formxx">How did I get picked for jury service?</button>
