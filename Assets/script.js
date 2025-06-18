@@ -1,4 +1,4 @@
-const questionsAndAnswers = {
+const questionsAndAnswers = { //List of normal questions and answers. the order is <QUESTION>: <ANSWER>, 
   "how did i get picked for jury service":
     "From a combined list of registered Philadelphia voters and adult licensed drivers, jurors are randomly selected by computer.",
   "why have some people never been called for jury service and i've been called more than once":
@@ -32,7 +32,53 @@ const questionsAndAnswers = {
   "what if the date i'm called to serve is not convenient":
     "Fill out your questionnaire and request a new date by phone or online. Hardship requests must be mailed.",
   "who do i talk to about my jury check":
-    "Call the Jury Commission Payroll Dept at 215-683-7193."
+    "Call the Jury Commission Payroll Dept at 215-683-7193.",
+    //Dud Questions that lead to negative responses
+    //This makes the fuzzy more strict
+  "how did i":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "why have some":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "what if":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "will i":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "how long":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "how often must":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "does my":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "what is":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "where can":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "can i bring":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "can":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "if i":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "what if the":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "who do":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "who":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "What":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "When":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "Where":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "Why":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "Which":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "Whose":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "How":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
 };
 
 const faqStructure = {
