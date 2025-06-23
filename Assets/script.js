@@ -53,7 +53,7 @@ const questionsAndAnswers = { //List of normal questions and answers. the order 
     "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "where can":
     "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
-  "can i bring":
+  "can i bring a":
     "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "can":
     "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
@@ -116,18 +116,202 @@ const chatBox = document.getElementById("chatBox");
 const chatForm = document.getElementById("chatForm");
 const userInput = document.getElementById("userInput");
 const faqContainer = document.getElementById("faqContainer");
-
+const avatar = document.createElement("img");// Make these global so the text init can reach the given profile
+avatar.src=" ";
+avatar.alt= " ";
+rnum = -1;
+fm = -1;
 function appendMessage(text, sender) {
   const msg = document.createElement("div");
   msg.classList.add("message", sender);
 
   if (sender === "bot") {
     const avatar = document.createElement("img");
-    avatar.src = "https://randomuser.me/api/portraits/men/32.jpg";
-    avatar.alt = "James";
+    //Random avatar generator
+    if(rnum<0){
+      fm = Math.floor(Math.random() * 2);
+      if(fm >=1){ //Male or female, 1< is male 1> is female
+        rnum = Math.floor(Math.random() * 9); //0-8 generate the "random" image
+        switch(rnum){ //Switch case of all possible options. Selects name and picture both of which are from the site
+          case 0:
+            avatar.src = "https://randomuser.me/api/portraits/women/14.jpg"
+            avatar.alt = "Dolores"
+            break;
+          case 1:
+            avatar.src = "https://randomuser.me/api/portraits/women/89.jpg"
+            avatar.alt = "Tiffany"
+            break;
+          case 2:
+            avatar.src = "https://randomuser.me/api/portraits/women/62.jpg"
+            avatar.alt = "Rhonda"
+            break;
+          case 3:
+            avatar.src = "https://randomuser.me/api/portraits/women/59.jpg"
+            avatar.alt = "Brianna"
+            break;
+          case 4:
+            avatar.src = "https://randomuser.me/api/portraits/women/42.jpg"
+            avatar.alt = "Jackie"
+            break;
+          case 5:
+            avatar.src = "https://randomuser.me/api/portraits/women/27.jpg"
+            avatar.alt = "Megan"
+            break;
+          case 6:
+            avatar.src = "https://randomuser.me/api/portraits/women/12.jpg"
+            avatar.alt = "Shannon"
+            break;
+          case 7:
+            avatar.src = "https://randomuser.me/api/portraits/women/85.jpg"
+            avatar.alt = "Wanda"
+            break;
+          case 8:
+            avatar.src = "https://randomuser.me/api/portraits/women/90.jpg"
+            avatar.alt = "Ruby"
+            break;
+          default:
+            avatar.src = "https://randomuser.me/api/portraits/women/61.jpg"
+            avatar.alt = "Scarlett"
+        }
+      } else {
+        rnum = Math.floor(Math.random() * 9); //0-8 generate the random image
+        switch(rnum){ //Switch case of all possible options. 
+          case 0:
+            avatar.src = "https://randomuser.me/api/portraits/men/55.jpg"
+            avatar.alt = "Louvel"
+            break;
+          case 1:
+            avatar.src = "https://randomuser.me/api/portraits/men/83.jpg"
+            avatar.alt = "Eric"
+            break;
+          case 2:
+            avatar.src = "https://randomuser.me/api/portraits/men/69.jpg"
+            avatar.alt = "Ken"
+            break;
+          case 3:
+            avatar.src = "https://randomuser.me/api/portraits/men/26.jpg"
+            avatar.alt = "Pedro"
+            break;
+          case 4:
+            avatar.src = "https://randomuser.me/api/portraits/men/58.jpg"
+            avatar.alt = "Armando"
+            break;
+          case 5:
+            avatar.src = "https://randomuser.me/api/portraits/men/56.jpg"
+            avatar.alt = "Bill"
+            break;
+          case 6:
+            avatar.src = "https://randomuser.me/api/portraits/men/49.jpg"
+            avatar.alt = "Maurice"
+            break;
+          case 7:
+            avatar.src = "https://randomuser.me/api/portraits/men/1.jpg"
+            avatar.alt = "Lloyd"
+            break;
+          case 8:
+            avatar.src = "https://randomuser.me/api/portraits/men/32.jpg"
+            avatar.alt = "James"
+            break;
+          default:
+            avatar.src = "https://randomuser.me/api/portraits/men/61.jpg"
+            avatar.alt = "Francisco"
+        }
+      }
+    } else {
+      if(fm >=1){ //Male or female, 1< is male 1> is female
+        switch(rnum){ //Switch case of all possible options. Selects name and picture both of which are from the site
+          case 0:
+            avatar.src = "https://randomuser.me/api/portraits/women/14.jpg"
+            avatar.alt = "Dolores"
+            break;
+          case 1:
+            avatar.src = "https://randomuser.me/api/portraits/women/89.jpg"
+            avatar.alt = "Tiffany"
+            break;
+          case 2:
+            avatar.src = "https://randomuser.me/api/portraits/women/62.jpg"
+            avatar.alt = "Rhonda"
+            break;
+          case 3:
+            avatar.src = "https://randomuser.me/api/portraits/women/59.jpg"
+            avatar.alt = "Brianna"
+            break;
+          case 4:
+            avatar.src = "https://randomuser.me/api/portraits/women/42.jpg"
+            avatar.alt = "Jackie"
+            break;
+          case 5:
+            avatar.src = "https://randomuser.me/api/portraits/women/27.jpg"
+            avatar.alt = "Megan"
+            break;
+          case 6:
+            avatar.src = "https://randomuser.me/api/portraits/women/12.jpg"
+            avatar.alt = "Shannon"
+            break;
+          case 7:
+            avatar.src = "https://randomuser.me/api/portraits/women/85.jpg"
+            avatar.alt = "Wanda"
+            break;
+          case 8:
+            avatar.src = "https://randomuser.me/api/portraits/women/90.jpg"
+            avatar.alt = "Ruby"
+            break;
+          default:
+            avatar.src = "https://randomuser.me/api/portraits/women/61.jpg"
+            avatar.alt = "Scarlett"
+        }
+      } else {
+        rnum = Math.floor(Math.random() * 9); //0-8 generate the random image
+        switch(rnum){ //Switch case of all possible options. 
+          case 0:
+            avatar.src = "https://randomuser.me/api/portraits/men/55.jpg"
+            avatar.alt = "Louvel"
+            break;
+          case 1:
+            avatar.src = "https://randomuser.me/api/portraits/men/83.jpg"
+            avatar.alt = "Eric"
+            break;
+          case 2:
+            avatar.src = "https://randomuser.me/api/portraits/men/69.jpg"
+            avatar.alt = "Ken"
+            break;
+          case 3:
+            avatar.src = "https://randomuser.me/api/portraits/men/26.jpg"
+            avatar.alt = "Pedro"
+            break;
+          case 4:
+            avatar.src = "https://randomuser.me/api/portraits/men/58.jpg"
+            avatar.alt = "Armando"
+            break;
+          case 5:
+            avatar.src = "https://randomuser.me/api/portraits/men/56.jpg"
+            avatar.alt = "Bill"
+            break;
+          case 6:
+            avatar.src = "https://randomuser.me/api/portraits/men/49.jpg"
+            avatar.alt = "Maurice"
+            break;
+          case 7:
+            avatar.src = "https://randomuser.me/api/portraits/men/1.jpg"
+            avatar.alt = "Lloyd"
+            break;
+          case 8:
+            avatar.src = "https://randomuser.me/api/portraits/men/32.jpg"
+            avatar.alt = "James"
+            break;
+          default:
+            avatar.src = "https://randomuser.me/api/portraits/men/61.jpg"
+            avatar.alt = "Francisco"
+        }
+      }
+    }
+    //Legacy
+    //avatar.src = "https://randomuser.me/api/portraits/men/32.jpg";
+    //avatar.alt = "James";
+
     const textBox = document.createElement("div");
     textBox.classList.add("text");
-    textBox.textContent = `James: ${text}`;
+    textBox.textContent = avatar.alt + `: ${text}`;
     msg.appendChild(avatar);
     msg.appendChild(textBox);
   } else {
@@ -205,6 +389,6 @@ function renderFAQ() {
 }
 
 window.onload = () => {
-  appendMessage("Hi, I'm James. Ask me anything about jury duty or pick a question below.", "bot");
+  appendMessage("Hi, I'm "+ avatar.alt +". Ask me anything about jury duty or pick a question below.", "bot");
   renderFAQ();
 };
