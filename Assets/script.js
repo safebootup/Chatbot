@@ -261,7 +261,6 @@ function appendMessage(text, sender) {
             avatar.alt = "Scarlett"
         }
       } else {
-        rnum = Math.floor(Math.random() * 9); //0-8 generate the random image
         switch(rnum){ //Switch case of all possible options. 
           case 0:
             avatar.src = "https://randomuser.me/api/portraits/men/55.jpg"
