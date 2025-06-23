@@ -388,6 +388,8 @@ function renderFAQ() {
 }
 
 window.onload = () => {
-  appendMessage("Hi, I'm "+ avatar.alt +". Ask me anything about jury duty or pick a question below.", "bot");
+  //Cant make the Introduction work so im temporarily removing it
+  //appendMessage("Hi, I'm "+ avatar.alt +". Ask me anything about jury duty or pick a question below.", "bot");
+  appendMessage("Hello, Ask me anything about jury duty or pick a question below.", "bot");
   renderFAQ();
 };
