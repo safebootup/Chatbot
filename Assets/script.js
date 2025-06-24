@@ -90,65 +90,65 @@ const questionsAndAnswers = { //List of normal questions and answers. the order 
   "Gun":
     "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "What if I":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "how have you":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "you":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "Bomb":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "Smuggle":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "Knife":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "Firearm":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "explosive":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "shoot":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "stab":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "Attack":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "violent":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "threat":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "grenade":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "poison":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "arson":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "assualt":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.", 
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.", 
   "drugs":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "weed":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "marijuana":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "bribe":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "meth":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "cocaine":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "sabotage":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "steal":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "theft":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "fraud":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "tamper":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "false documents":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "fake id":
-   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
 };
 
 const faqStructure = {
@@ -197,6 +197,7 @@ function appendMessage(text, sender) {
 
   if (sender === "bot") {
     const avatar = document.createElement("img");
+    
     //Random avatar generator
     if(rnum<0){
       fm = Math.floor(Math.random() * 2);
@@ -414,7 +415,7 @@ function getClosestMatch(input) {
     }
   }
 
-  return highestScore >= 2 ? bestMatch : null;
+  return highestScore >= 4 ? bestMatch : null;
 }
 
 chatForm.addEventListener("submit", (e) => {
