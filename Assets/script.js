@@ -95,6 +95,34 @@ const questionsAndAnswers = { //List of normal questions and answers. the order 
    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "you":
    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "Bomb":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "Smuggle":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "Knife":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "Firearm":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "explosive":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "shoot":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "stab":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "Attack":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "violent":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "threat":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "grenade":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "poison":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "arson":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "assualt":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.", 
 
 };
 
