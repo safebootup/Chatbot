@@ -123,7 +123,32 @@ const questionsAndAnswers = { //List of normal questions and answers. the order 
    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "assualt":
    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.", 
-
+  "drugs":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "weed":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "marijuana":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "bribe":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "meth":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "cocaine":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "sabotage":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "steal":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "theft":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "fraud":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "tamper":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "false documents":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "fake id":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
 };
 
 const faqStructure = {
