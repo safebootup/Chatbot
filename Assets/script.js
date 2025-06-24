@@ -79,6 +79,23 @@ const questionsAndAnswers = { //List of normal questions and answers. the order 
     "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "How":
     "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "Weapon":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "Into the courthouse":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "Into the":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "Why cant I":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "Gun":
+    "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "What if I":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "how have you":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+  "you":
+   "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+
 };
 
 const faqStructure = {
@@ -131,7 +148,7 @@ function appendMessage(text, sender) {
     if(rnum<0){
       fm = Math.floor(Math.random() * 2);
       if(fm >=1){ //Male or female, 1< is male 1> is female
-        rnum = Math.floor(Math.random() * 9); //0-8 generate the "random" image
+        rnum = Math.floor(Math.random() * 10); //0-9 generate the "random" image
         switch(rnum){ //Switch case of all possible options. Selects name and picture both of which are from the site
           case 0:
             avatar.src = "https://randomuser.me/api/portraits/women/14.jpg"
@@ -169,12 +186,12 @@ function appendMessage(text, sender) {
             avatar.src = "https://randomuser.me/api/portraits/women/90.jpg"
             avatar.alt = "Ruby"
             break;
-          default:
+          default: //If its something unexpected you get scarlett
             avatar.src = "https://randomuser.me/api/portraits/women/61.jpg"
             avatar.alt = "Scarlett"
         }
       } else {
-        rnum = Math.floor(Math.random() * 9); //0-8 generate the random image
+        rnum = Math.floor(Math.random() * 10); //0-9 generate the random image
         switch(rnum){ //Switch case of all possible options. 
           case 0:
             avatar.src = "https://randomuser.me/api/portraits/men/55.jpg"
@@ -212,7 +229,7 @@ function appendMessage(text, sender) {
             avatar.src = "https://randomuser.me/api/portraits/men/32.jpg"
             avatar.alt = "James"
             break;
-          default:
+          default: //Incase its something random you get francisco
             avatar.src = "https://randomuser.me/api/portraits/men/61.jpg"
             avatar.alt = "Francisco"
         }
