@@ -150,7 +150,8 @@ const questionsAndAnswers = { //List of normal questions and answers. the order 
   "fake id":
     "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
 };
-
+//A list of words that should return a dud response no matter what if they are included in the sentence
+const wordBlacklist = ["tamper", "theft", "steal", "gun", "shoot", "firearm", "sabotage","bomb", "explosive", "bribe", "knife", "smuggle","arson", "poison", "meth", "cocaine", "weapon"];
 const faqStructure = {
   "Jury Selection": [
     "how did i get picked for jury service",
@@ -195,9 +196,10 @@ function appendMessage(text, sender) {
   const msg = document.createElement("div");
   msg.classList.add("message", sender);
 
+
   if (sender === "bot") {
     const avatar = document.createElement("img");
-    
+
     //Random avatar generator
     if(rnum<0){
       fm = Math.floor(Math.random() * 2);
@@ -426,6 +428,11 @@ chatForm.addEventListener("submit", (e) => {
   userInput.value = "";
 
   setTimeout(() => {
+    //immediately check if the message contains a word in the blacklist
+    if (wordBlacklist.some(validate => input.includes(validate))){
+      appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below!", "bot");
+      return -1
+    }
     const match = getClosestMatch(input);
     if (match) {
       appendMessage(questionsAndAnswers[match], "bot");
