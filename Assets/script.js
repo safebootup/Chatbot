@@ -407,17 +407,21 @@ function getClosestMatch(input) {
     const inputWords = input.split(" ");
     const questionWords = question.split(" ");
 
+    let matchCount = 0;
+
     inputWords.forEach(word => {
       if (questionWords.includes(word)) score++;
     });
 
-    if (score > highestScore) {
-      highestScore = score;
+    const percentage = (matchCount / inputWords.length) *100;
+
+    if (percentage > highestPercentage) {
+      highestPercentage = percentage;
       bestMatch = question;
     }
   }
 
-  return highestScore >= 4 ? bestMatch : null;
+  return highestPercentage >= 90 ? bestMatch : null;
 }
 
 chatForm.addEventListener("submit", (e) => {
@@ -430,14 +434,14 @@ chatForm.addEventListener("submit", (e) => {
   setTimeout(() => {
     //immediately check if the message contains a word in the blacklist
     if (wordBlacklist.some(validate => input.includes(validate))){
-      appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below!", "bot");
+      appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below or talk to a representative at (215-683-7170) / (215-683-7183)!", "bot");
       return -1
     }
     const match = getClosestMatch(input);
     if (match) {
       appendMessage(questionsAndAnswers[match], "bot");
     } else {
-      appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below.", "bot");
+      appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below or talk to a representative at (215-683-7170) / (215-683-7183).", "bot");
     }
   }, 600);
 });
