@@ -207,8 +207,8 @@ function appendMessage(text, sender) {
         rnum = Math.floor(Math.random() * 10); //0-9 generate the "random" image
         switch(rnum){ //Switch case of all possible options. Selects name and picture both of which are from the site
           case 0:
-            avatar.src = "https://randomuser.me/api/portraits/women/14.jpg"
-            avatar.alt = "Dolores"
+            avatar.src = "https://randomuser.me/api/portraits/women/44.jpg"
+            avatar.alt = "Jordan"
             break;
           case 1:
             avatar.src = "https://randomuser.me/api/portraits/women/89.jpg"
@@ -294,8 +294,8 @@ function appendMessage(text, sender) {
       if(fm >=1){ //Male or female, 1< is male 1> is female
         switch(rnum){ //Switch case of all possible options. Selects name and picture both of which are from the site
           case 0:
-            avatar.src = "https://randomuser.me/api/portraits/women/14.jpg"
-            avatar.alt = "Dolores"
+            avatar.src = "https://randomuser.me/api/portraits/women/44.jpg"
+            avatar.alt = "Jordan"
             break;
           case 1:
             avatar.src = "https://randomuser.me/api/portraits/women/89.jpg"
