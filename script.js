@@ -1,3 +1,26 @@
+// Avatar pool
+const avatars = [
+  {
+    name: "James",
+    image: "https://randomuser.me/api/portraits/men/32.jpg"
+  },
+  {
+    name: "Alex",
+    image: "https://randomuser.me/api/portraits/men/45.jpg"
+  },
+  {
+    name: "Jordan",
+    image: "https://randomuser.me/api/portraits/women/44.jpg"
+  },
+  {
+    name: "Taylor",
+    image: "https://randomuser.me/api/portraits/women/22.jpg"
+  }
+];
+
+// Select one avatar for this session
+let selectedAvatar;
+
 const questionsAndAnswers = {
   "how did i get picked for jury service":
     "From a combined list of registered Philadelphia voters and adult licensed drivers, jurors are randomly selected by computer.",
@@ -75,22 +98,21 @@ function appendMessage(text, sender) {
   const msg = document.createElement("div");
   msg.classList.add("message", sender);
 
+  const textBox = document.createElement("div");
+  textBox.classList.add("text");
+
   if (sender === "bot") {
     const avatar = document.createElement("img");
-    avatar.src = "https://randomuser.me/api/portraits/men/32.jpg";
-    avatar.alt = "James";
-    const textBox = document.createElement("div");
-    textBox.classList.add("text");
-    textBox.textContent = `James: ${text}`;
+    avatar.src = selectedAvatar.image;
+    avatar.alt = selectedAvatar.name;
+    avatar.classList.add("avatar");
+    textBox.textContent = `${selectedAvatar.name}: ${text}`;
     msg.appendChild(avatar);
-    msg.appendChild(textBox);
   } else {
-    const textBox = document.createElement("div");
-    textBox.classList.add("text");
     textBox.textContent = text;
-    msg.appendChild(textBox);
   }
 
+  msg.appendChild(textBox);
   chatBox.appendChild(msg);
   chatBox.scrollTop = chatBox.scrollHeight;
 }
@@ -105,7 +127,6 @@ function getClosestMatch(input) {
     const questionWords = question.split(" ");
 
     let matchCount = 0;
-
     inputWords.forEach(word => {
       if (questionWords.includes(word)) matchCount++;
     });
@@ -118,9 +139,8 @@ function getClosestMatch(input) {
     }
   }
 
-  return highestPercentage >= 90 ? bestMatch : null;
+  return highestPercentage >= 50 ? bestMatch : null;
 }
-
 
 chatForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -163,6 +183,7 @@ function renderFAQ() {
 }
 
 window.onload = () => {
+  selectedAvatar = avatars[Math.floor(Math.random() * avatars.length)];
   appendMessage("Hello. Ask me anything about jury duty or pick a question from the categories below.", "bot");
   renderFAQ();
 };
