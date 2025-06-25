@@ -98,20 +98,19 @@ function appendMessage(text, sender) {
 function getClosestMatch(input) {
   input = input.toLowerCase();
   let bestMatch = "";
-  let highestScore = 0;
+  let highestPercentage = 0;
 
   for (const question in questionsAndAnswers) {
-    let score = 0;
     const inputWords = input.split(" ");
     const questionWords = question.split(" ");
 
     let matchCount = 0;
 
     inputWords.forEach(word => {
-      if (questionWords.includes(word)) score++;
+      if (questionWords.includes(word)) matchCount++;
     });
 
-    const percentage = (matchCount / inputWords.length) *100;
+    const percentage = (matchCount / inputWords.length) * 100;
 
     if (percentage > highestPercentage) {
       highestPercentage = percentage;
@@ -121,6 +120,7 @@ function getClosestMatch(input) {
 
   return highestPercentage >= 90 ? bestMatch : null;
 }
+
 
 chatForm.addEventListener("submit", (e) => {
   e.preventDefault();
