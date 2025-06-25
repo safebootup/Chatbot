@@ -105,17 +105,21 @@ function getClosestMatch(input) {
     const inputWords = input.split(" ");
     const questionWords = question.split(" ");
 
+    let matchCount = 0;
+
     inputWords.forEach(word => {
       if (questionWords.includes(word)) score++;
     });
 
-    if (score > highestScore) {
-      highestScore = score;
+    const percentage = (matchCount / inputWords.length) *100;
+
+    if (percentage > highestPercentage) {
+      highestPercentage = percentage;
       bestMatch = question;
     }
   }
 
-  return highestScore >= 2 ? bestMatch : null;
+  return highestPercentage >= 90 ? bestMatch : null;
 }
 
 chatForm.addEventListener("submit", (e) => {
@@ -130,7 +134,7 @@ chatForm.addEventListener("submit", (e) => {
     if (match) {
       appendMessage(questionsAndAnswers[match], "bot");
     } else {
-      appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below.", "bot");
+      appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below or talk to a representative at (215-683-7170) / (215-683-7183).", "bot");
     }
   }, 600);
 });
@@ -159,6 +163,6 @@ function renderFAQ() {
 }
 
 window.onload = () => {
-  appendMessage("Hi, I'm James. Ask me anything about jury duty or pick a question below.", "bot");
+  appendMessage("Hello. Ask me anything about jury duty or pick a question from the categories below.", "bot");
   renderFAQ();
 };
