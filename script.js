@@ -18,7 +18,6 @@ const avatars = [
   }
 ];
 
-// Select one avatar for this session
 let selectedAvatar;
 
 const questionsAndAnswers = {
@@ -117,29 +116,46 @@ function appendMessage(text, sender) {
   chatBox.scrollTop = chatBox.scrollHeight;
 }
 
+// Levenshtein distance function
+function levenshteinDistance(a, b) {
+  const dp = Array(a.length + 1).fill(null).map(() =>
+    Array(b.length + 1).fill(null)
+  );
+
+  for (let i = 0; i <= a.length; i++) dp[i][0] = i;
+  for (let j = 0; j <= b.length; j++) dp[0][j] = j;
+
+  for (let i = 1; i <= a.length; i++) {
+    for (let j = 1; j <= b.length; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      dp[i][j] = Math.min(
+        dp[i - 1][j] + 1,       // Deletion
+        dp[i][j - 1] + 1,       // Insertion
+        dp[i - 1][j - 1] + cost // Substitution
+      );
+    }
+  }
+
+  return dp[a.length][b.length];
+}
+
+// Closest match using Levenshtein similarity
 function getClosestMatch(input) {
-  input = input.toLowerCase();
-  let bestMatch = "";
-  let highestPercentage = 0;
+  input = input.toLowerCase().trim();
+  let bestMatch = null;
+  let lowestDistance = Infinity;
 
   for (const question in questionsAndAnswers) {
-    const inputWords = input.split(" ");
-    const questionWords = question.split(" ");
+    const distance = levenshteinDistance(input, question);
+    const threshold = Math.floor(question.length * 0.3); // ~70% similarity
 
-    let matchCount = 0;
-    inputWords.forEach(word => {
-      if (questionWords.includes(word)) matchCount++;
-    });
-
-    const percentage = (matchCount / inputWords.length) * 100;
-
-    if (percentage > highestPercentage) {
-      highestPercentage = percentage;
+    if (distance <= threshold && distance < lowestDistance) {
+      lowestDistance = distance;
       bestMatch = question;
     }
   }
 
-  return highestPercentage >= 50 ? bestMatch : null;
+  return bestMatch;
 }
 
 chatForm.addEventListener("submit", (e) => {
@@ -162,6 +178,8 @@ chatForm.addEventListener("submit", (e) => {
 function renderFAQ() {
   for (const group in faqStructure) {
     const details = document.createElement("details");
+    details.classList.add("faq-group");
+
     const summary = document.createElement("summary");
     summary.textContent = group;
     details.appendChild(summary);
