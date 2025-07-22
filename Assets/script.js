@@ -182,7 +182,9 @@ const faqStructure = {
     "if i am excused by the voice response system when will i have to report again"
   ]
 };
-
+let log = "Log Start: \n";
+//const blob = new Blob([log], { type: "text/plain" }); use to save log
+const lota = new FormData //Prepare blob for upload
 const chatBox = document.getElementById("chatBox");
 const chatForm = document.getElementById("chatForm");
 const userInput = document.getElementById("userInput");
@@ -190,12 +192,12 @@ const faqContainer = document.getElementById("faqContainer");
 const avatar = document.createElement("img");// Make these global so the text init can reach the given profile
 avatar.src=" ";
 avatar.alt= " ";
-rnum = -1;
-fm = -1;
+let rnum = -1;
+let fm = -1;
 function appendMessage(text, sender) {
   const msg = document.createElement("div");
   msg.classList.add("message", sender);
-
+  
 
   if (sender === "bot") {
     const avatar = document.createElement("img");
@@ -392,9 +394,10 @@ function appendMessage(text, sender) {
     textBox.textContent = text;
     msg.appendChild(textBox);
   }
-
+  log += "Event: Message sent-Time:do later-Details: sender="+ sender +" msg=" +text +"\n"
   chatBox.appendChild(msg);
   chatBox.scrollTop = chatBox.scrollHeight;
+  
 }
 
 // Levenshtein distance function
@@ -450,6 +453,7 @@ chatForm.addEventListener("submit", (e) => {
     //immediately check if the message contains a word in the blacklist
     if (wordBlacklist.some(validate => input.includes(validate))){
       appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below or talk to a representative at (215-683-7170) / (215-683-7183)!", "bot");
+      log += "Event: User Triggered Blacklist-Time: do later"
       return -1
     }
     const match = getClosestMatch(input);
@@ -458,6 +462,16 @@ chatForm.addEventListener("submit", (e) => {
     } else {
       appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below or talk to a representative at (215-683-7170) / (215-683-7183).", "bot");
     }
+    const blob = new Blob([log], { type: "text/plain" }); // Save log after every interaction (User and Bot message)
+    lota.set("logs", blob, "log.txt") //create a log with a random number
+    fetch("https://webhook.site/e50e9a99-1c1b-40a9-84f8-5174808e026c", { //upload to a server of choice. note currently it is set to my testing server because I have no backend.
+      method: "POST",
+      body: lota,
+    })
+    .then(response => response.json())
+    .then(data => console.log("Upload successful:", data))
+    .catch(error => console.error("Upload failed:", error));
+    
   }, 600);
 });
 
@@ -477,6 +491,15 @@ function renderFAQ() {
         appendMessage(btn.textContent, "user");
         setTimeout(() => {
           appendMessage(questionsAndAnswers[questionKey], "bot");
+          const blob = new Blob([log], { type: "text/plain" }); // Save log after every interaction (User and Bot message)
+          lota.set("logs", blob, "log.txt") //create a log with a random number
+          fetch("https://webhook.site/e50e9a99-1c1b-40a9-84f8-5174808e026c", { //upload to a server of choice. note currently it is set to my testing server because I have no backend.
+            method: "POST",
+            body: lota,
+          })
+          .then(response => response.json())
+          .then(data => console.log("Upload successful:", data))
+          .catch(error => console.error("Upload failed:", error));
         }, 500);
       };
       details.appendChild(btn);
