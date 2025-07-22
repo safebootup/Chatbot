@@ -441,7 +441,17 @@ function getClosestMatch(input) {
 
   return bestMatch;
 }
-
+function sendlog() {
+          const blob = new Blob([log], { type: "text/plain" }); // Save log after every interaction (User and Bot message)
+          lota.set("logs", blob, "log.txt") //create a log with a random number
+          fetch("https://webhook.site/e50e9a99-1c1b-40a9-84f8-5174808e026c", { //upload to a server of choice. note currently it is set to my testing server because I have no backend.
+            method: "POST",
+            body: lota,
+          })
+          .then(response => response.json())
+          .then(data => console.log("Upload successful:", data))
+          .catch(error => console.error("Upload failed:", error));
+}
 chatForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const input = userInput.value.trim();
@@ -462,16 +472,7 @@ chatForm.addEventListener("submit", (e) => {
     } else {
       appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below or talk to a representative at (215-683-7170) / (215-683-7183).", "bot");
     }
-    const blob = new Blob([log], { type: "text/plain" }); // Save log after every interaction (User and Bot message)
-    lota.set("logs", blob, "log.txt") //create a log with a random number
-    fetch("https://webhook.site/e50e9a99-1c1b-40a9-84f8-5174808e026c", { //upload to a server of choice. note currently it is set to my testing server because I have no backend.
-      method: "POST",
-      body: lota,
-    })
-    .then(response => response.json())
-    .then(data => console.log("Upload successful:", data))
-    .catch(error => console.error("Upload failed:", error));
-    
+    sendlog();
   }, 600);
 });
 
@@ -491,15 +492,7 @@ function renderFAQ() {
         appendMessage(btn.textContent, "user");
         setTimeout(() => {
           appendMessage(questionsAndAnswers[questionKey], "bot");
-          const blob = new Blob([log], { type: "text/plain" }); // Save log after every interaction (User and Bot message)
-          lota.set("logs", blob, "log.txt") //create a log with a random number
-          fetch("https://webhook.site/e50e9a99-1c1b-40a9-84f8-5174808e026c", { //upload to a server of choice. note currently it is set to my testing server because I have no backend.
-            method: "POST",
-            body: lota,
-          })
-          .then(response => response.json())
-          .then(data => console.log("Upload successful:", data))
-          .catch(error => console.error("Upload failed:", error));
+          sendlog();
         }, 500);
       };
       details.appendChild(btn);
