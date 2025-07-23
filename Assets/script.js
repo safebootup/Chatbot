@@ -37,7 +37,7 @@ const questionsAndAnswers = { //List of normal questions and answers. the order 
   "It is against my religion to judge people. How can I be excused?":
     "The First Judicial District does not excuse citizens due to religious beliefs. However, upon your request, we can assist you and reschedule your jury service to a Civil trial, which does not involve criminal matters.",
   "How can I postpone my jury duty date?":
-    "If this is your first postponement request, you can postpone yourself through our website at: https://fjdjurorq.phila.gov/ejuror/webapp/login If you have been postponed once before, or failed to appear for your original service date, please email us at: jury@courts.phila.gov with your request. Please include your name, participant number, and date you would like to be postponed to. The Jury Staff will email you letting you know if your request has been granted.",
+    "If this is your first postponement request, you can postpone yourself through our website at: https://fjdjurorq.phila.gov/ejuror/webapp/login. If you have been postponed once before, or failed to appear for your original service date, please email us at: jury@courts.phila.gov with your request. Please include your name, participant number, and date you would like to be postponed to. The Jury Staff will email you letting you know if your request has been granted.",
   "Will I receive a new summons if I postpone my jury duty date online?":
     "Yes, a new summons will be mailed to your home address.",
   "I serve in the military and I cannot attend jury duty, how can I be excused?":
@@ -234,12 +234,40 @@ const faqStructure = {
     "what if the date i'm called to serve is not convenient",
     "what is considered an extreme hardship",
     "if i am excused by the voice response system when will i have to report again"
+  ],
+  "New not yet placed": [
+    "It is against my religion to judge people. How can I be excused?",
+    "How can I postpone my jury duty date?",
+    "Will I receive a new summons if I postpone my jury duty date online?",
+    "I serve in the military and I cannot attend jury duty, how can I be excused?",
+    "I am not paid by my job/employer for jury service, how can I be excused?",
+    "I am the sole provider for my family and cannot afford to come to jury duty.",
+    "I am sick, disabled, under doctor’s care, depressed, have anxiety, Bi-polar, take medication that affects me, cannot sit for long periods of time, and cannot come to jury duty; how can I be excused?",
+    "I am self-employed and own my own business. How can I be excused?",
+    "I am a full-time student and cannot miss classes to attend jury duty. How can I be excused?",
+    "I moved out of Philadelphia and received a jury summons. How can I be taken off the Philadelphia jury list?",
+    "I am a police officer/firefighter in Philadelphia. How do I get excused?",
+    "I have family members who are police officers, attorneys, judges, and do not think I will be a fair/impartial juror. How can I be excused?",
+    "I am a breastfeeding mother. What are my options?",
+    "I was arrested/convicted of a crime; does that excuse me from jury duty?",
+    "What time does the jury room open?",
+    "I want to bring my lunch with me. Are there microwaves available for me to use?",
+    "What is the fax number?",
+    "What happens if I do not show up for jury duty?",
+    "How do I get in contact someone in the Jury Commission?",
+    "I lost my summons. How do I get my participant number?",
+    "Does the Jury Commission provide transportation?",
+    "What do I do if the information on my summons is wrong?",
+    "How do I request a hardship?",
+    "Where do I report for jury duty?",
+    "I only received a final notice postcard; I never received the original summons. What should I do?",
+    "I am a doctor, lawyer, nurse, teacher, essential employee and cannot serve jury duty. How can I be excused?",
   ]
 };
 let log = "Log Start: \n";
 //const blob = new Blob([log], { type: "text/plain" }); use to save log
 const lota = new FormData //Prepare blob for upload
-const SITE = "https://webhook.site/044bce7e-8c6e-4877-976f-1128d63a955f" //Point this at the backend code for the logs to be sent to. Make sure the name of form is logs
+const SITE ="" //https://webhook.site/044bce7e-8c6e-4877-976f-1128d63a955f" //Point this at the backend code for the logs to be sent to. Make sure the name of form is logs
 const chatBox = document.getElementById("chatBox");
 const chatForm = document.getElementById("chatForm");
 const userInput = document.getElementById("userInput");
