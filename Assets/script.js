@@ -185,7 +185,7 @@ const faqStructure = {
 let log = "Log Start: \n";
 //const blob = new Blob([log], { type: "text/plain" }); use to save log
 const lota = new FormData //Prepare blob for upload
-const SITE = "https://webhook.site/044bce7e-8c6e-4877-976f-1128d63a955f" //Point this at the backend code for the logs to be sent to.
+const SITE = "https://webhook.site/044bce7e-8c6e-4877-976f-1128d63a955f" //Point this at the backend code for the logs to be sent to. Make sure the name of form is logs
 const chatBox = document.getElementById("chatBox");
 const chatForm = document.getElementById("chatForm");
 const userInput = document.getElementById("userInput");
@@ -465,6 +465,7 @@ chatForm.addEventListener("submit", (e) => {
     if (wordBlacklist.some(validate => input.includes(validate))){
       appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below or talk to a representative at (215-683-7170) / (215-683-7183)!", "bot");
       log += "Event: User Triggered Blacklist-Time: do later"
+      sendlog();
       return -1
     }
     const match = getClosestMatch(input);
