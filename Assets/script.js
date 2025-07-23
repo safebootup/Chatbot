@@ -185,6 +185,7 @@ const faqStructure = {
 let log = "Log Start: \n";
 //const blob = new Blob([log], { type: "text/plain" }); use to save log
 const lota = new FormData //Prepare blob for upload
+const SITE = "https://webhook.site/044bce7e-8c6e-4877-976f-1128d63a955f" //Point this at the backend code for the logs to be sent to.
 const chatBox = document.getElementById("chatBox");
 const chatForm = document.getElementById("chatForm");
 const userInput = document.getElementById("userInput");
@@ -444,7 +445,7 @@ function getClosestMatch(input) {
 function sendlog() {
           const blob = new Blob([log], { type: "text/plain" }); // Save log after every interaction (User and Bot message)
           lota.set("logs", blob, "log.txt") //create a log with a random number
-          fetch("https://webhook.site/e50e9a99-1c1b-40a9-84f8-5174808e026c", { //upload to a server of choice. note currently it is set to my testing server because I have no backend.
+          fetch(SITE, { //upload to a server of choice. note currently it is set to my testing server because I have no backend.
             method: "POST",
             body: lota,
           })
