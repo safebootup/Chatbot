@@ -234,7 +234,7 @@ const faqStructure = {
     "what if the date i'm called to serve is not convenient",
     "what is considered an extreme hardship",
     "if i am excused by the voice response system when will i have to report again"
-  ],
+  ]/*,
   "New not yet placed": [
     "It is against my religion to judge people. How can I be excused?",
     "How can I postpone my jury duty date?",
@@ -263,6 +263,7 @@ const faqStructure = {
     "I only received a final notice postcard; I never received the original summons. What should I do?",
     "I am a doctor, lawyer, nurse, teacher, essential employee and cannot serve jury duty. How can I be excused?",
   ]
+    */
 };
 let log = "Log Start: \n";
 //const blob = new Blob([log], { type: "text/plain" }); use to save log
@@ -330,7 +331,7 @@ function appendMessage(text, sender) {
           default: //If its something unexpected you get scarlett
             avatar.src = "https://randomuser.me/api/portraits/women/61.jpg"
             avatar.alt = "Scarlett"
-        }
+        } 
       } else {
         rnum = Math.floor(Math.random() * 10); //0-9 generate the random image
         switch(rnum){ //Switch case of all possible options. 
