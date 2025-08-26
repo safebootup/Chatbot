@@ -546,7 +546,7 @@ chatForm.addEventListener("submit", (e) => {
   setTimeout(() => {
     //immediately check if the message contains a word in the blacklist
     if (wordBlacklist.some(validate => input.includes(validate))){
-      appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below or talk to a representative at (215-683-7170) / (215-683-7183)!", "bot");
+      appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below or talk to a representative at Jury@courts.phila.gov", "bot");
       log += "Event: User Triggered Blacklist-Time: do later"
       sendlog();
       return -1
@@ -555,7 +555,7 @@ chatForm.addEventListener("submit", (e) => {
     if (match) {
       appendMessage(questionsAndAnswers[match], "bot");
     } else {
-      appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below or talk to a representative at (215-683-7170) / (215-683-7183).", "bot");
+      appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below or talk to a representative at Jury@courts.phila.gov", "bot");
     }
     sendlog();
   }, 600);
