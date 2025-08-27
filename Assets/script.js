@@ -514,7 +514,7 @@ function levenshteinDistance(a, b) {
   return dp[a.length][b.length];
 }
 // Returns the best matching question based on whitelist keywords
-function getWhitelistMatch(input) {
+function getClosestWhitelistMatch(input) {
   input = input.toLowerCase();
   let bestCandidate = null;
   let lowestDistance = Infinity;
@@ -590,7 +590,7 @@ chatForm.addEventListener("submit", (e) => {
       return;
     }
     // Check whitelist keywords first
-    const whitelistMatch = getWhitelistMatch(input);
+    const whitelistMatch = getClosestWhitelistMatch(input);
     if (whitelistMatch) {
       appendMessage(questionsAndAnswers[whitelistMatch], "bot");
     } else {
