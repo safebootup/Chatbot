@@ -208,6 +208,10 @@ const questionsAndAnswers = { //List of normal questions and answers. the order 
 };
 //A list of words that should return a dud response no matter what if they are included in the sentence
 const wordBlacklist = ["tamper", "theft", "steal", "gun", "shoot", "firearm", "sabotage","bomb", "explosive", "bribe", "knife", "smuggle","arson", "poison", "meth", "cocaine", "weapon"];
+// Whitelist keywords for boosting match accuracy
+const wordWhitelist = ["military", "childcare", "police", "officer", "firefighter"];
+
+
 const faqStructure = {
   "Jury Selection": [
     "how did i get picked for jury service",
@@ -509,6 +513,29 @@ function levenshteinDistance(a, b) {
 
   return dp[a.length][b.length];
 }
+// Returns the best matching question based on whitelist keywords
+function getWhitelistMatch(input) {
+  input = input.toLowerCase();
+  let bestCandidate = null;
+  let lowestDistance = Infinity;
+  for (const keyword of wordWhitelist) {
+    if (input.includes(keyword)) {
+      // Find all questions containing the keyword
+      const candidates = Object.keys(questionsAndAnswers).filter(q => q.toLowerCase().includes(keyword));
+      for (const candidate of candidates) {
+        const distance = levenshteinDistance(input, candidate.toLowerCase());
+        if (distance < lowestDistance) {
+          lowestDistance = distance;
+          bestCandidate = candidate;
+        }
+      }
+      if (bestCandidate) {
+        return bestCandidate;
+      }
+    }
+  }
+  return null;
+}
 
 // Closest match using Levenshtein similarity
 function getClosestMatch(input, thresholdFactor) {
@@ -529,15 +556,15 @@ function getClosestMatch(input, thresholdFactor) {
   return bestMatch;
 }
 function sendlog() {
-          const blob = new Blob([log], { type: "text/plain" }); // Save log after every interaction (User and Bot message)
-          lota.set("logs", blob, "log.txt") //create a log with a random number
-          fetch(SITE, { //upload to a server of choice. note currently it is set to my testing server because I have no backend.
-            method: "POST",
-            body: lota,
-          })
-          .then(response => response.json())
-          .then(data => console.log("Upload successful:", data))
-          .catch(error => console.error("Upload failed:", error));
+  const blob = new Blob([log], { type: "text/plain" }); // Save log after every interaction (User and Bot message)
+  lota.set("logs", blob, "log.txt") //create a log with a random number
+  fetch(SITE, { //upload to a server of choice. note currently it is set to my testing server because I have no backend.
+    method: "POST",
+    body: lota,
+  })
+  .then(response => response.json())
+  .then(data => console.log("Upload successful:", data))
+  .catch(error => console.error("Upload failed:", error));
 }
 chatForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -562,18 +589,24 @@ chatForm.addEventListener("submit", (e) => {
       sendlog();
       return;
     }
-    const match = getClosestMatch(input, .3);
-    if (match) {
-      appendMessage(questionsAndAnswers[match], "bot");
-      pendingSuggestion = null;
+    // Check whitelist keywords first
+    const whitelistMatch = getWhitelistMatch(input);
+    if (whitelistMatch) {
+      appendMessage(questionsAndAnswers[whitelistMatch], "bot");
     } else {
-      const suggestion = getClosestMatch(input, .7);
-      if(suggestion != null){
-        appendMessage('Im sorry, did you mean to ask "' + suggestion + '"?', "bot");
-        pendingSuggestion = suggestion;
-      } else {
-        appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below or talk to a representative at Jury@courts.phila.gov.", "bot");
+      const match = getClosestMatch(input, .3);
+      if (match) {
+        appendMessage(questionsAndAnswers[match], "bot");
         pendingSuggestion = null;
+      } else {
+        const suggestion = getClosestMatch(input, .7);
+        if(suggestion != null){
+          appendMessage('Im sorry, did you mean to ask "' + suggestion + '"?', "bot");
+          pendingSuggestion = suggestion;
+        } else {
+          appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below or talk to a representative at Jury@courts.phila.gov.", "bot");
+          pendingSuggestion = null;
+        }
       }
     }
     sendlog();
