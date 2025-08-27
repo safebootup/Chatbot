@@ -34,57 +34,57 @@ const questionsAndAnswers = { //List of normal questions and answers. the order 
   "who do i talk to about my jury check":
     "Call the Jury Commission Payroll Dept at 215-683-7193.",
   //New questions
-  "It is against my religion to judge people. How can I be excused?":
+  "It is against my religion to judge people. How can I be excused":
     "The First Judicial District does not excuse citizens due to religious beliefs. However, upon your request, we can assist you and reschedule your jury service to a Civil trial, which does not involve criminal matters.",
-  "How can I postpone my jury duty date?":
+  "How can I postpone my jury duty date":
     "If this is your first postponement request, you can postpone yourself through our website at: https://fjdjurorq.phila.gov/ejuror/webapp/login. If you have been postponed once before, or failed to appear for your original service date, please email us at: jury@courts.phila.gov with your request. Please include your name, participant number, and date you would like to be postponed to. The Jury Staff will email you letting you know if your request has been granted.",
-  "Will I receive a new summons if I postpone my jury duty date online?":
+  "Will I receive a new summons if I postpone my jury duty date online":
     "Yes, a new summons will be mailed to your home address.",
-  "I serve in the military and I cannot attend jury duty, how can I be excused?":
+  "I serve in the military and I cannot attend jury duty, how can I be excused":
     "Please be advised to be excused from jury service a copy of your Military Orders is needed. Please email the document to jury@courts.phila.gov Please include your juror participant number on the documents.",
-  "I am the sole provider for my family and cannot afford to come to jury duty.":
+  "I am the sole provider for my family and cannot afford to come to jury duty":
     "A letter will be needed from your EMPLOYER on COMPANY LETTERHEAD stating that you are not compensated for jury service. Once you receive the letter, email, or fax it to us, and after we receive the letter, we will excuse you from service for the year. Please include your juror participant number on the documents. The fax number is 215-683-7183 and our email address is jury@courts.phila.gov",
-  "I am not paid by my job/employer for jury service, how can I be excused?":
+  "I am not paid by my job/employer for jury service, how can I be excused":
     "A letter will be needed from your EMPLOYER on COMPANY LETTERHEAD stating that you are not compensated for jury service. Once you receive the letter, email, or fax it to us, and after we receive the letter, we will excuse you from service for the year. Please include your juror participant number on the documents. The fax number is 215-683-7183 and our email address is jury@courts.phila.gov",
-  "I am sick, disabled, under doctor’s care, depressed, have anxiety, Bi-polar, take medication that affects me, cannot sit for long periods of time, and cannot come to jury duty; how can I be excused?":
+  "I am sick, disabled, under doctor’s care, depressed, have anxiety, Bi-polar, take medication that affects me, cannot sit for long periods of time, and cannot come to jury duty; how can I be excused":
     "To be excused for a medical hardship, the Jury Commission requires a letter from your doctor stating that you are unable to perform the functions of a juror. Once you have the letter, please email it to jury@courts.phila.gov or fax it to 215-683-7183. Please include your juror participant number when sending the letter.",
-  "I am self-employed and own my own business. How can I be excused?":
+  "I am self-employed and own my own business. How can I be excused":
     "If you are self-employed and asking to be excused from Jury service, please send us your business card and EIN. Please email the proof to jury@courts.phila.gov. Please include your juror participant number in the email. After we receive the information you will be excused.",
-  "I am a full-time student and cannot miss classes to attend jury duty. How can I be excused?":
+  "I am a full-time student and cannot miss classes to attend jury duty. How can I be excused":
     "If you are a full-time student, and would like to be excused from jury service, the Jury Commission requires a copy of your Student ID AND a copy of your full-time class schedule. Email the proof to jury@courts.phila.gov Please include your juror participation number in the email. Once we receive the proof, we will excuse you from service for a year.",
-  "I moved out of Philadelphia and received a jury summons. How can I be taken off the Philadelphia jury list?":
+  "I moved out of Philadelphia and received a jury summons. How can I be taken off the Philadelphia jury list":
     "Please provide us with proof that you no longer live in Philadelphia. Proof is one of the following with your name and new address outside of Philadelphia on it: Driver’s License, Voter’s Registration card, Utility bill, Mortgage/Lease papers, or anything that shows your name and non-Philadelphia address. Please email the proof to jury@courts.phila.gov and include your juror participant number in the email. Once we receive the proof, you will be excused from jury service.",
-  "I am a doctor, lawyer, nurse, teacher, essential employee and cannot serve jury duty. How can I be excused?":
+  "I am a doctor, lawyer, nurse, teacher, essential employee and cannot serve jury duty. How can I be excused":
     "Per Philadelphia’s new Jury Commissioner, the nature of your employment does not excuse you from jury duty. However, the Jury Commissioner is more than willing to accommodate you with a new date if you cannot make the date on your summons. Please email jury@courts.phila.gov with a date within the next two months that will work for your schedule.",
-  "I am a police officer/firefighter in Philadelphia. How do I get excused?":
+  "I am a police officer/firefighter in Philadelphia. How do I get excused":
     "The Jury Commissioner offers a courtesy to active Philadelphia police officers and firefighters and will excuse you from service for the year with the proper documentation. Please submit a Directive 13, filled out by your supervisor, to jury@courts.phila.gov .",
-  "I have family members who are police officers, attorneys, judges, and do not think I will be a fair/impartial juror. How can I be excused?":
+  "I have family members who are police officers, attorneys, judges, and do not think I will be a fair/impartial juror. How can I be excused":
     "Being related to someone who works for the police department or in the court system does not excuse you from jury duty. However, we can reassign you to a civil trial instead of a criminal trial. You will have the opportunity to voice any concerns or biases you might have to the Judge on your selection day.",
-  "I am a breastfeeding mother. What are my options?":
+  "I am a breastfeeding mother. What are my options":
     "We have lactation rooms available in both City Hall and the Stout Center. Please notify the jury staff when you arrive, and they will assist you. If you are asking to be excused from service, please email your request to the jury staff at: jury@courts.phila.gov",
-  "I was arrested/convicted of a crime; does that excuse me from jury duty?":
+  "I was arrested/convicted of a crime; does that excuse me from jury duty":
     "If you were convicted of a crime punishable by one or more years in prison, you will be disqualified from service. If you were arrested and not sure if you qualify for jury duty, please email your question to: jury@courts.phila.gov. We will do a background check and notify you of your status. Please include your full name and participant number in the email.",
-  "What time does the jury room open?":
+  "What time does the jury room open":
     "The Jury offices in both City Hall room 195 and 1301 Filbert St., room 101 open at 7:30am.",
-  "I want to bring my lunch with me. Are there microwaves available for me to use?":
+  "I want to bring my lunch with me. Are there microwaves available for me to use":
     "If you need to use a microwave, please let the jury staff in the assembly room know and they will assist you.",
-  "What is the fax number?":
+  "What is the fax number":
     "The Jury Commission’s fax number is 215-683-7183. When faxing a document, please make sure your name and participant number are clearly visible. Please include your email address and we will notify you when the document is received.",
-  "What happens if I do not show up for jury duty?":
+  "What happens if I do not show up for jury duty":
     "If you do not show up for your scheduled jury duty date, you will be mailed a Failure to Appear summons. If you do not show up for the rescheduled date, you will be placed on a scofflaw list. When the President Judge sees too many people are not coming in for service, they will subpoena you to court where you could possibly be fined up to $500 and sent to prison for up to 10 days. Then ultimately given a new jury duty date.",
-  "How do I get in contact someone in the Jury Commission?":
+  "How do I get in contact someone in the Jury Commission":
     "You can call us at 215-683-7170 Monday through Friday from 7:30am to 4:00pm. You can also email us at: jury@courts.phila.gov. If you are emailing us, please include your name and participant number.",
-  "I lost my summons. How do I get my participant number?":
+  "I lost my summons. How do I get my participant number":
     "Email the Jury Commission at: jury@courts.phila.gov Please send us your full name and home address.",
-  "Does the Jury Commission provide transportation?":
+  "Does the Jury Commission provide transportation":
     "No, the Jury Commission does not provide transportation. We recommend using public transportation.",
-  "What do I do if the information on my summons is wrong?":
+  "What do I do if the information on my summons is wrong":
     "If your name or birthdate is incorrect on your summons, please email us at jury@courts.phila.gov. Please provide us with your participant number, what information is wrong, and the correct information. We will email you back once the correction has been made. If your address is wrong, you will be able to make that change online at https://fjdjurorq.phila.gov/ejuror/webapp/login",
-  "How do I request a hardship?":
+  "How do I request a hardship":
     "You can email your request to: jury@courts.phila.gov. Please include your name, participant number, and hardship. The Jury staff will email you back with our decision.",
-  "Where do I report for jury duty?":
+  "Where do I report for jury duty":
     "If your scheduled jury service date is on a Monday, Tuesday, or Wednesday, you are to report to 1301 Filbert St., room 101. If you are scheduled to appear on a Thursday or Friday, you are to report to City Hall room 195.",
-  "I only received a final notice postcard; I never received the original summons. What should I do?":
+  "I only received a final notice postcard; I never received the original summons. What should I do":
     "On the final notice postcard, above your name, is a nine-digit juror number. Please go to https://fjdjurorq.phila.gov/ejuror/webapp/login input your information and answer the questionnaire. If the date on the notice does not work for your schedule, you will be able to postpone yourself after the questionnaire is complete. If you need additional help, please email us at jury@courts.phila.gov",
 
     //Dud Questions that lead to negative responses
@@ -280,6 +280,7 @@ avatar.src=" ";
 avatar.alt= " ";
 let rnum = -1;
 let fm = -1;
+let pendingSuggestion = null; // Store suggested question for follow-up
 function appendMessage(text, sender) {
   const msg = document.createElement("div");
   msg.classList.add("message", sender);
@@ -548,19 +549,31 @@ chatForm.addEventListener("submit", (e) => {
   setTimeout(() => {
     //immediately check if the message contains a word in the blacklist
     if (wordBlacklist.some(validate => input.includes(validate))){
-      appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below or talk to a representative at Jury@courts.phila.gov!", "bot");
+      appendMessage("I'm sorry, I cannot answer that. Try selecting a question below or talk to a representative at Jury@courts.phila.gov!", "bot");
       log += "Event: User Triggered Blacklist-Time: do later"
+      pendingSuggestion = null;
       sendlog();
       return -1
+    }
+        // Check if user is responding to a suggestion
+    if (pendingSuggestion && ["yes","yep","yeah","yup","ye","y"].includes(input.toLowerCase())) {
+      appendMessage(questionsAndAnswers[pendingSuggestion], "bot");
+      pendingSuggestion = null;
+      sendlog();
+      return;
     }
     const match = getClosestMatch(input, .3);
     if (match) {
       appendMessage(questionsAndAnswers[match], "bot");
+      pendingSuggestion = null;
     } else {
-      if(getClosestMatch(input, .7) != null){
-        appendMessage("I'm sorry, did you mean to ask " + getClosestMatch(input, .7) + "?", "bot");
+      const suggestion = getClosestMatch(input, .7);
+      if(suggestion != null){
+        appendMessage('Im sorry, did you mean to ask "' + suggestion + '"?', "bot");
+        pendingSuggestion = suggestion;
       } else {
         appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below or talk to a representative at Jury@courts.phila.gov.", "bot");
+        pendingSuggestion = null;
       }
     }
     sendlog();
