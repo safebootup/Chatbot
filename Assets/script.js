@@ -89,6 +89,7 @@ const questionsAndAnswers = { //List of normal questions and answers. the order 
 
     //Dud Questions that lead to negative responses
     //This makes the fuzzy more strict
+    /*
   "how did i":
     "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "why have some":
@@ -203,6 +204,7 @@ const questionsAndAnswers = { //List of normal questions and answers. the order 
     "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
   "fake id":
     "I'm sorry, I couldn't find an answer to that. Try selecting a question below.",
+    */
 };
 //A list of words that should return a dud response no matter what if they are included in the sentence
 const wordBlacklist = ["tamper", "theft", "steal", "gun", "shoot", "firearm", "sabotage","bomb", "explosive", "bribe", "knife", "smuggle","arson", "poison", "meth", "cocaine", "weapon"];
@@ -508,14 +510,14 @@ function levenshteinDistance(a, b) {
 }
 
 // Closest match using Levenshtein similarity
-function getClosestMatch(input) {
+function getClosestMatch(input, thresholdFactor) {
   input = input.toLowerCase().trim();
   let bestMatch = null;
   let lowestDistance = Infinity;
 
   for (const question in questionsAndAnswers) {
     const distance = levenshteinDistance(input, question);
-    const threshold = Math.floor(question.length * 0.3); // ~70% similarity
+    const threshold = Math.floor(question.length * thresholdFactor); // ~70% similarity
 
     if (distance <= threshold && distance < lowestDistance) {
       lowestDistance = distance;
@@ -546,16 +548,20 @@ chatForm.addEventListener("submit", (e) => {
   setTimeout(() => {
     //immediately check if the message contains a word in the blacklist
     if (wordBlacklist.some(validate => input.includes(validate))){
-      appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below or talk to a representative at Jury@courts.phila.gov", "bot");
+      appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below or talk to a representative at Jury@courts.phila.gov!", "bot");
       log += "Event: User Triggered Blacklist-Time: do later"
       sendlog();
       return -1
     }
-    const match = getClosestMatch(input);
+    const match = getClosestMatch(input, .3);
     if (match) {
       appendMessage(questionsAndAnswers[match], "bot");
     } else {
-      appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below or talk to a representative at Jury@courts.phila.gov", "bot");
+      if(getClosestMatch(input, .7) != null){
+        appendMessage("I'm sorry, did you mean to ask " + getClosestMatch(input, .7) + "?", "bot");
+      } else {
+        appendMessage("I'm sorry, I couldn't find an answer to that. Try selecting a question below or talk to a representative at Jury@courts.phila.gov.", "bot");
+      }
     }
     sendlog();
   }, 600);
