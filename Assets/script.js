@@ -14,13 +14,13 @@ const questionsAndAnswers = { //List of normal questions and answers. the order 
   "does my employer have to pay me for time missed from work due to jury service":
     "No, but they can’t punish you for attending. Employers are not required to pay you.",
   "what is considered an extreme hardship":
-    "Childcare, lost wages, or caregiving issues. Documentation required. Call 215-683-7170 with questions.",
+    "Childcare, lost wages, or caregiving issues. Documentation required. Email Jury@courts.phila.gov with questions.",
   "where can i park":
     "Use public transit if possible. See the SEPTA or Philadelphia Parking Authority websites.",
   "can i bring my cell phone, laptop, or other electronic device into the courthouse":
     "Yes, but they must be turned off in the courtroom unless otherwise instructed.",
   "i lost my summons how do i get a new one":
-    "Call 215 683-7170 and follow prompts or speak to a representative, available Mon–Fri 8:30 AM – 3:30 PM.",
+    "Email Jury@courts.phila.gov and follow prompts or speak to a representative, available Mon–Fri 7:30 AM – 4:00 PM.",
   "what form of id is needed when inquiring about my summons":
     "Name, address, date of birth, and participant number (if known). Never your SSN.",
   "why am i told to call the night before":
@@ -32,7 +32,7 @@ const questionsAndAnswers = { //List of normal questions and answers. the order 
   "what if the date i'm called to serve is not convenient":
     "Fill out your questionnaire and request a new date by phone or online. Hardship requests must be mailed.",
   "who do i talk to about my jury check":
-    "Call the Jury Commission Payroll Dept at 215-683-7193.",
+    "Email the Jury Commission Payroll Dept at Jury@courts.phila.gov.",
   //New questions
   "It is against my religion to judge people. How can I be excused":
     "The First Judicial District does not excuse citizens due to religious beliefs. However, upon your request, we can assist you and reschedule your jury service to a Civil trial, which does not involve criminal matters.",
@@ -73,7 +73,7 @@ const questionsAndAnswers = { //List of normal questions and answers. the order 
   "What happens if I do not show up for jury duty":
     "If you do not show up for your scheduled jury duty date, you will be mailed a Failure to Appear summons. If you do not show up for the rescheduled date, you will be placed on a scofflaw list. When the President Judge sees too many people are not coming in for service, they will subpoena you to court where you could possibly be fined up to $500 and sent to prison for up to 10 days. Then ultimately given a new jury duty date.",
   "How do I get in contact someone in the Jury Commission":
-    "You can call us at 215-683-7170 Monday through Friday from 7:30am to 4:00pm. You can also email us at: jury@courts.phila.gov. If you are emailing us, please include your name and participant number.",
+    "You can contact us Monday through Friday from 7:30am to 4:00pm. You can email us at: jury@courts.phila.gov. If you are emailing us, please include your name and participant number.",
   "I lost my summons. How do I get my participant number":
     "Email the Jury Commission at: jury@courts.phila.gov Please send us your full name and home address.",
   "Does the Jury Commission provide transportation":
@@ -207,9 +207,9 @@ const questionsAndAnswers = { //List of normal questions and answers. the order 
     */
 };
 //A list of words that should return a dud response no matter what if they are included in the sentence
-const wordBlacklist = ["tamper", "theft", "steal", "gun", "shoot", "firearm", "sabotage","bomb", "explosive", "bribe", "knife", "smuggle","arson", "poison", "meth", "cocaine", "weapon"];
+const wordBlacklist = ["tamper", "theft", "steal", "gun", "shoot", "firearm", "sabotage","bomb", "explosive", "bribe", "knife", "smuggle","arson", "poison", "meth", "cocaine", "weapon", "attack", "violent", "threat", "grenade", "stab", "assualt", "drugs", "weed", "marijuana", "fraud", "false documents", "fake id"];
 // Whitelist keywords for boosting match accuracy
-const wordWhitelist = ["military", "childcare", "police", "officer", "firefighter"];
+const wordWhitelist = ["military", "childcare", "police", "officer", "firefighter", "self-employed", "student", "full-time", "moved", "out of state", "breastfeeding", "breast feed", "convicted", "arrested", "sick", "disabled", "anxiety", "depressed", "bipolar", "medication", "doctor's care", "doctor", "employer", "not paid", "sole provider"];
 
 
 const faqStructure = {
