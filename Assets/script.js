@@ -209,7 +209,7 @@ const questionsAndAnswers = { //List of normal questions and answers. the order 
 //A list of words that should return a dud response no matter what if they are included in the sentence
 const wordBlacklist = ["tamper", "theft", "steal", "gun", "shoot", "firearm", "sabotage","bomb", "explosive", "bribe", "knife", "smuggle","arson", "poison", "meth", "cocaine", "weapon", "attack", "violent", "threat", "grenade", "stab", "assualt", "drugs", "weed", "marijuana", "fraud", "false documents", "fake id"];
 // Whitelist keywords for boosting match accuracy
-const wordWhitelist = ["military", "childcare", "police", "officer", "firefighter", "self-employed", "student", "full-time", "moved", "out of state", "breastfeeding", "breast feed", "convicted", "arrested", "sick", "disabled", "anxiety", "depressed", "bipolar", "medication", "doctor's care", "doctor", "employer", "not paid", "sole provider"];
+const wordWhitelist = ["military", "childcare", "police", "officer", "firefighter", "self-employed", "student", "full-time", "moved", "out of state", "breastfeeding", "breast feed", "convicted", "arrested", "sick", "disabled", "anxiety", "depressed", "bipolar", "medication", "doctor's care", "doctor", "employer", "not paid", "sole provider", "religion", "religious", "lawyer", "doctor", "nurse", "teacher", "essential employee"];
 
 
 const faqStructure = {
